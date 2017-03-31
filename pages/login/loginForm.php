@@ -12,8 +12,6 @@
 		
 		clear: both;
 		
-		border: solid black 2px;
-		
 		backface-visibility: hidden;
 		transform-style: preserve-3d;
 		transition: .5s;
