@@ -147,7 +147,6 @@ function buttonClicked()
 		// verify key
 		$.post("pages/login/verifyKeyCode.php", {"keyCode" : key}, function(data)
 			{
-				window.alert(data);
 				if(data == "valid")
 				{
 					// proceed with changing password
@@ -178,7 +177,14 @@ function buttonClicked()
 			// proceed to update password
 			// TODO
 			
+			// remove modal div and show confirmation message
+			removeModalDiv();
 			Toast("Your password has been successfully changed!");
+			
+			setTimeout(function()
+			{
+				$("#backToLoginButton").trigger("click");
+			}, 3000);
 			
 		}
 		
