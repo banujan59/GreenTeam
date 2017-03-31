@@ -120,6 +120,9 @@ function buttonClicked()
 			var email = $("input[name=passRecInputField]").val();
 			
 			// send email
+			$.post("pages/login/sendEmail.php", {"email" : email}, function(data)
+			{
+			});
 			
 			// clear field
 			$("input[name=passRecInputField]").val("");
@@ -129,10 +132,10 @@ function buttonClicked()
 			buttonClicked.attr("id", "verifyKeyButton");
 			buttonClicked.text("Confirm");
 			
-			// fadeIn & show toast for confirmation
+			// fadeIn & show Toast for confirmation
 			$(this).fadeIn(500);
 			
-			toast("An email was sent to " + email);
+			Toast("An email was sent to " + email);
 		});
 	}
 	
@@ -144,10 +147,15 @@ function buttonClicked()
 		// verify key
 		$.post("pages/login/verifyKeyCode.php", {"keyCode" : key}, function(data)
 			{
+				window.alert(data);
 				if(data == "valid")
 				{
 					// proceed with changing password
-					
+					var div = insertModalDiv();
+					div.load("pages/login/resetPassword.php", function(data, s, x)
+					{
+						div.html(data);
+					});
 				}
 				
 				// if key code is not valid
@@ -156,6 +164,28 @@ function buttonClicked()
 					Toast("The key you entered is not valid.");
 				}
 			});
+	}
+	
+	else if( buttonClicked.attr("id") == "setPasswordButton" )
+	{
+		var newPassword = $("input[name=setPasswordField]").val();
+		var newPasswordConfirm = $("input[name=setPasswordFieldConfirm]").val();
+		
+		// check if password match
+		// TODO regex password
+		if( (newPassword != "")  && (newPassword == newPasswordConfirm) )
+		{
+			// proceed to update password
+			// TODO
+			
+			Toast("Your password has been successfully changed!");
+			
+		}
+		
+		else
+		{
+			Toast("The passwords do not match in the confirmation");
+		}
 	}
 		
 	// for the cancel and confirm button in the languageDiv
@@ -166,21 +196,7 @@ function buttonClicked()
 			requestLanguageChange($(".languageChoice").val());
 		}
 			
-		$(".modalDiv").remove();
-		$("#selectLanguage").css(
-		{
-			"background-color" : "rgb(30, 39, 142)",
-			"box-shadow" : "none"
-		});
-			
-		$("#container").css(
-		{
-			"-webkit-filter" : "none",
-			"-moz-filter" : "none",
-			"-o-filter" : "none",
-			"-ms-filter" : "none",
-			"filter" : "none"
-		});
+		removeModalDiv();
 	}
 }
 
@@ -209,16 +225,7 @@ function languageButtonClicked()
 	
 	// for the language button
 	else if( buttonClicked.attr("id") == "selectLanguage" )
-	{
-		$("#container").css(
-		{
-			"-webkit-filter" : "blur(5px)",
-			"-moz-filter" : "blur(5px)",
-			"-o-filter" : "blur(5px)",
-			"-ms-filter" : "blur(5px)",
-			"filter" : "blur(5px)"
-		});
-		
+	{	
 		buttonClicked.css(
 		{
 			"background-color" : "rgb(239, 48, 56)",
@@ -226,9 +233,7 @@ function languageButtonClicked()
 		});
 		
 		// add modal div
-		var div = $("<div></div>");
-		div.attr("class", "modalDiv");
-		div.insertBefore($("footer"));
+		var div = insertModalDiv();
 		
 		div.load("pages/login/selectLanguageDiv.php", function(data, s, x)
 		{
@@ -242,7 +247,7 @@ function requestLanguageChange(language)
 	// TODO : request language change
 }
 
-function toast(message)
+function Toast(message)
 {
 	var div = $("<div></div>");
 	div.attr("class", "toast");
@@ -255,4 +260,44 @@ function toast(message)
 	{
 		div.remove();
 	}, 4500);
+}
+
+function insertModalDiv()
+{	
+	// add modal div
+	var div = $("<div></div>");
+	div.attr("class", "modalDiv");
+	div.insertBefore($("footer"));
+	
+	// blur
+	$("#container").css(
+	{
+		"-webkit-filter" : "blur(5px)",
+		"-moz-filter" : "blur(5px)",
+		"-o-filter" : "blur(5px)",
+		"-ms-filter" : "blur(5px)",
+		"filter" : "blur(5px)"
+	});
+	
+	return div;
+}
+
+function removeModalDiv()
+{
+	$(".modalDiv").remove();
+	$("#selectLanguage").css(
+	{
+		"background-color" : "rgb(30, 39, 142)",
+		"box-shadow" : "none"
+	});
+			
+	// remove blur
+	$("#container").css(
+	{
+		"-webkit-filter" : "none",
+		"-moz-filter" : "none",
+		"-o-filter" : "none",
+		"-ms-filter" : "none",
+		"filter" : "none"
+	});
 }

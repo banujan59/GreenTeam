@@ -1,4 +1,4 @@
-<div class="languageDiv">
+<div class="inputBox">
 	Please select your language:
 	
 	<br/><br/>
