@@ -1,0 +1,57 @@
+@keyframes enButtonStartupAnimation
+{
+	from
+	{
+		top: 150%;
+	}
+	
+	to
+	{
+		top: 85%;
+	}
+}
+
+@keyframes popLanguageButton
+{
+	0%
+	{
+		background-color: rgb(30, 39, 142);
+	}
+	
+	50%
+	{
+		background-color: rgb(239, 48, 56);
+	}
+	
+	100%
+	{
+		background-color: rgb(30, 39, 142);
+	}
+}
+
+@keyframes toastAnimation
+{
+	0%
+	{
+		top: 150%;
+		opacity: 0;
+	}
+	
+	20%
+	{
+		top: 85%;
+		opacity: 1;
+	}
+	
+	60%
+	{
+		top: 85%;
+		opacity: 1;
+	}
+	
+	100%
+	{
+		top: 150%;
+		opacity: 0;
+	}
+}

@@ -1,0 +1,196 @@
+/* General */
+body
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	
+	perspective: 1000px;
+}
+/* General */
+
+/* The header */
+header
+{
+	position : absolute;
+	left : 50%;
+	
+	width: 45%;
+	height: 40%;
+	
+	margin-left: -22.5%;
+}
+/* The header */
+
+section
+{
+	position: absolute;
+	left: 50%;
+	top: 30%;
+	
+	width: 50%;
+	height: 50%;
+	margin-left: -25%;
+	
+	text-align: center;
+}
+
+/* Styles for the buttons */
+.button
+{
+	position: absolute;
+	
+	width: 150px;
+	height: 40px;
+	
+	padding-top: 10px;
+	
+	color: white;
+	font-size: 23px;
+	text-align: center;
+	
+	cursor: pointer;
+	
+	background-color: rgb(30, 39, 142);
+	border-radius: 10px;
+	
+	transition: .5s;
+}
+
+.button:hover
+{
+	background-color: rgb(239, 48, 56);
+	transform: translateZ(35px);
+	box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+#moreInfoButton, #loginButton
+{
+	left: 50%;
+	top: 50%;
+	margin-top: -25px;
+}
+
+#moreInfoButton
+{
+	margin-left: -170px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+#loginButton
+{
+	margin-left: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+/* Styles for the buttons */
+
+/* Styles for the language buttons */
+.languageButton
+{
+	position: absolute;
+	left: 50%;
+	top: 85%;
+	
+	width: 120px;
+	height : 70px;
+	border-radius: 60px;
+	padding-top: 50px;
+	color : white;
+	font-size: 23px;
+	text-align: center;
+	
+	background-color: rgb(30, 39, 142);
+	
+	cursor: pointer;
+	
+	transition: .75s;
+	animation: enButtonStartupAnimation 1s;
+}
+
+.languageButton:hover
+{
+	background-color: rgb(239, 48, 56) !important;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.50) !important;
+}
+
+#enButton
+{
+	margin-left: -250px;
+}
+
+#frButton
+{
+	margin-left: -60px;
+}
+
+#tlButton
+{
+	margin-left: 130px;
+}
+/* Styles for the buttons */
+
+/* language selection */
+.modalDiv
+{
+	position : absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.languageDiv
+{
+	position : absolute;
+	left: 50%;
+	top: 50%;
+	
+	width: 40%;
+	height: 20%;
+	
+	margin-left: -20%;
+	margin-top: -15%;
+	padding-top: 1%;
+	
+	border: solid black 2px;
+	border-radius: 20px;
+	
+	background-color: rgb(251, 251, 251);
+	
+	text-align : center;
+	font-size: 25px;
+}
+
+.languageDiv select
+{
+	width: 150px;
+	height: 50px;
+}
+/* language selection */
+
+/* Style for the toast */
+.toast
+{
+	position: absolute;
+	left: 50%;
+	top: 150%;
+	
+	width: 50%;
+	height: 70px;
+	
+	margin-left: -25%;
+	padding-top: 50px;
+	
+	background-color: rgb(0, 0, 0);
+	
+	color: white;
+	text-align: center;
+	font-size: 20px;
+	
+	z-index: 999;
+}
+/* Style for the toast */
