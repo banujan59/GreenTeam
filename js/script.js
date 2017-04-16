@@ -99,7 +99,10 @@ function buttonClicked()
 			{
 				if(data == "success")
 				{
-					location = "home.php";
+					$(document.body).fadeOut(500, function()
+					{
+						location = "home.php";
+					});
 				}
 			});
 	}
