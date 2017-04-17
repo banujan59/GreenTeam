@@ -97,7 +97,7 @@ session_start();
             <div class="row">
             <div class="col-md-12">
             
-            <section class="scheduleViewer">
+            <section style="margin-top:5%" class="scheduleViewer">
             	<div class="sectionHeader">
 					<h2>What's on your schedule?</h2>
                 </div>

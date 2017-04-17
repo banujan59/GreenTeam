@@ -32,7 +32,7 @@
 				<li><a href="home.php">Home</a></li>
 				<li><a href="home.php?page=personal_file">Personal File</a></li>
 			    <li><a href="home.php?page=schedule">Schedule</a></li>
-			    <li><a href="home.php?page=appointment">Appointment</a></li>
+			    <li><a href="home.php?page=appointments">Appointments</a></li>
 			    <?php
 					if( $_SESSION["user_type"] == "student")
 					{
@@ -72,14 +72,27 @@
                     <?php
 				}
 				
-				else if($_GET["page"] == "appointment")
+				else if($_GET["page"] == "appointments")
 				{
-					
+					?>
+                    	<script>
+							$(".container").load("pages/home/getAppointments.php");
+						</script>
+                    <?php
 				}
 				
 				else if($_GET["page"] == "progression")
 				{
 					
+				}
+				
+				else
+				{
+					?>
+                    	<script>
+							location = "home.php";
+						</script>
+                    <?php
 				}
 			?>
             
