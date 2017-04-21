@@ -31,6 +31,7 @@ $(function()
 		e.preventDefault();
 		
 		var url = $(this).attr("href");
+		$(".container").css("transform", "translateZ(-50px)");
 		$(document.body).fadeOut(500, function()
 		{
 			location = url;

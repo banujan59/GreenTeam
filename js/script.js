@@ -82,12 +82,9 @@ function buttonClicked()
 		});
 	}
 	
-	else if( buttonClicked.attr("id") == "forgotPasswordButton" )
+	else if( buttonClicked.attr("id") == "forgotPasswordButton" ||  buttonClicked.attr("id") == "backToLoginButton")
 	{
 		$("#formContainer").toggleClass("flipped");
-		
-		$("#backButton").text("Back to login");
-		$("#backButton").attr("id", "backToLoginButton");
 	}
 	
 	else if( buttonClicked.attr("id") == "loginToHomeButton" )
@@ -105,14 +102,6 @@ function buttonClicked()
 					});
 				}
 			});
-	}
-	
-	else if( buttonClicked.attr("id") == "backToLoginButton" )
-	{
-		$("#formContainer").toggleClass("flipped");
-		
-		$("#backToLoginButton").text("Back");
-		$("#backToLoginButton").attr("id", "backButton");
 	}
 	
 	else if( buttonClicked.attr("id") == "sendEmailKeyButton" )

@@ -1,5 +1,6 @@
 $(function()
-{
+{	
+	$(".container").css("transform", "translateZ(2px)");
 	$(".circleButton").click(function()
 	{
 		var buttonID = $(this).attr("id")
@@ -29,10 +30,12 @@ $(function()
 function fadeINContainer()
 {
 	$(".container").css("opacity", "1");
+	$(".container").css("transform", "translateZ(0px)");
 }
 
 function fadeOUTContainer()
 {
+	$(".container").css("transform", "translateZ(-50px)");
 	$(".container").css("opacity", "0");
 }
 

@@ -18,6 +18,16 @@ session_start();
 					border-top-left-radius: 10px;
 					border-top-right-radius: 10px;
 				}
+				
+				.container
+				{
+					height: 80%;
+				}
+				
+				.circleButton
+				{
+					position: fixed;
+				}
 			</style>
             <script src="js/appointments.js"></script>
      		   	<div class="row" style="height:37.37166324435318%;">

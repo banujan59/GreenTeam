@@ -201,8 +201,7 @@ input[type=radio], .radioText
 {
 	position: absolute;
 	left: 50%;
-	top: 60%;
-	margin-top: -75px;
+	top: 50%;
 	
 	width: 150px;
 	height : 150px;
