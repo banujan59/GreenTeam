@@ -2,15 +2,18 @@
 session_start();	
 	if( isset($_SESSION["user_type"]) )
 	{
-		if($_SESSION["user_type"] = "student")
-		{
 			?>
             <div class="row" style="height:37.37166324435318%;">
             <div class="col-md-5">
             
             <image class="homeBanner" src="images/home.jpg"/>
             
-            <section class="notifications">
+			<?php
+			
+			if($_SESSION["user_type"] == "student")
+			{
+				?>
+				<section class="notifications">
             	<div class="sectionHeader">
 					<h2>Notifications</h2>
                 </div>
@@ -26,8 +29,86 @@ session_start();
                 	<p>
                     	You have <b>1</b> new message. <a>Click here to view messages</a>
                     </p>
+                </div>	
+            </section>
+				<?php
+			}
+			
+			else if($_SESSION["user_type"] == "admin")
+			{
+				?>
+					<section class="notifications">
+            	<div class="sectionHeader">
+					<h2>My Tools</h2>
+                </div>
+                <div class="sectionContent">
+					<br/>
+                	<form>
+					<div class="row" style="height:37.37166324435318%;">
+						<div class="col-md-2">
+							<label>Events: </label>
+						</div> <!-- End col -->
+						
+						<div class="col-md-5">
+							<select>
+								<option>Choose action</option>
+								<option>Add a new event</option>
+								<option>Edit an existant event</option>
+								<option>Update schedule</option>
+								<option>Add new lesson</option>
+							</select>
+						</div> <!-- End col -->
+						<div class="col-md-5">
+							<div class="button toolButtons">Perform</div>
+						</div> <!-- End col -->
+					</div> <!-- End row -->
+					
+					<br/>
+					
+					<div class="row" style="height:37.37166324435318%;">
+						<div class="col-md-2">
+							<label>Students: </label>
+						</div> <!-- End col -->
+						<div class="col-md-5">
+						<select>
+							<option>Choose action</option>
+							<option>Add new student</option>
+							<option>Edit student</option>
+							<option>Delete student</option>
+							<option>Display student</option>
+						</select>
+						</div> <!-- End col -->
+						<div class="col-md-5">
+							<div class="button toolButtons">Perform</div>
+						</div> <!-- End col -->
+					</div> <!-- End row -->
+					
+					<br/>
+					
+					<div class="row" style="height:37.37166324435318%;">
+						<div class="col-md-2">
+							<label>Schedule: </label>
+						</div> <!-- End col -->
+						<div class="col-md-5">
+							<select>
+								<option>Choose action</option>
+							</select>
+						</div> <!-- End col -->	
+						<div class="col-md-5">
+							<div class="button toolButtons">Perform</div>
+						</div> <!-- End col -->
+					</div> <!-- End row -->
+					
+					<br/>
+					</form>
+					<br/>
                 </div>
             </section>
+				<?php
+			}
+            
+			
+			?>
             
             </div>
             
@@ -187,16 +268,6 @@ session_start();
             </div>
             </div>
             <?php
-		} // end student home
-		
-		else
-		{
-			?>
-            	<script>
-					location = "index.php";
-				</script>
-            <?php
-		}
 	}
 	
 	else
