@@ -251,6 +251,29 @@ input[type=radio], .radioText
 	box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
 }
 
+/* Admin home page */
+.toolButtons
+{
+	position: relative;
+	left: 0%;
+	width: 100px;
+	height: 25px;
+	padding-top: 2px;
+	font-size: 16px;
+}
+
+.toolButtons:hover
+{
+	transform: translateZ(10px);
+}
+
+select
+{
+	width: 100%;
+}
+
+/* Admin home page */
+
 /* Scrollbar style */
 /* Source: https://css-tricks.com/examples/WebKitScrollbars/ */
 ::-webkit-scrollbar {
