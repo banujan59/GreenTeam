@@ -61,3 +61,33 @@ function Toast(message)
 		}, 1500);
 	});
 }
+
+
+function buttonClicked()
+{
+	var id = $(this).attr("id");
+	
+	if(id == "performStudentButton")
+	{
+		var selectedAction = $("#studentDropdown").val();
+		if(selectedAction == "Add new student")
+		{
+			
+		}
+		
+		else if(selectedAction == "Edit student")
+		{
+			
+		}
+		
+		else if(selectedAction == "Delete student")
+		{
+			
+		}
+		
+		else if(selectedAction == "Display student")
+		{
+			
+		}
+	}
+}

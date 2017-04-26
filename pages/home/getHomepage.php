@@ -50,7 +50,7 @@ session_start();
 						</div> <!-- End col -->
 						
 						<div class="col-md-5">
-							<select>
+							<select id="eventDropdown">
 								<option>Choose action</option>
 								<option>Add a new event</option>
 								<option>Edit an existant event</option>
@@ -59,7 +59,7 @@ session_start();
 							</select>
 						</div> <!-- End col -->
 						<div class="col-md-5">
-							<div class="button toolButtons">Perform</div>
+							<div id="performEventButton" class="button toolButtons">Perform</div>
 						</div> <!-- End col -->
 					</div> <!-- End row -->
 					
@@ -70,7 +70,7 @@ session_start();
 							<label>Students: </label>
 						</div> <!-- End col -->
 						<div class="col-md-5">
-						<select>
+						<select id="studentDropdown">
 							<option>Choose action</option>
 							<option>Add new student</option>
 							<option>Edit student</option>
@@ -79,7 +79,7 @@ session_start();
 						</select>
 						</div> <!-- End col -->
 						<div class="col-md-5">
-							<div class="button toolButtons">Perform</div>
+							<div id="performStudentButton" class="button toolButtons">Perform</div>
 						</div> <!-- End col -->
 					</div> <!-- End row -->
 					
@@ -90,12 +90,12 @@ session_start();
 							<label>Schedule: </label>
 						</div> <!-- End col -->
 						<div class="col-md-5">
-							<select>
+							<select id="scheduleDropdown">
 								<option>Choose action</option>
 							</select>
 						</div> <!-- End col -->	
 						<div class="col-md-5">
-							<div class="button toolButtons">Perform</div>
+							<div id="performScheduleButton" class="button toolButtons">Perform</div>
 						</div> <!-- End col -->
 					</div> <!-- End row -->
 					
@@ -104,6 +104,10 @@ session_start();
 					<br/>
                 </div>
             </section>
+			
+			<script>
+				$(".button").click(buttonClicked);
+			</script>
 				<?php
 			}
             
