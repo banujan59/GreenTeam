@@ -22,7 +22,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT username, userId, userType, balance FROM users WHERE username = '".$name."' AND  password = '".$password."'";
+$sql = "SELECT username, userId, userType FROM users WHERE username = '".$name."' AND  password = '".$password."'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -33,7 +33,6 @@ if ($result->num_rows > 0) {
     session_start();
     $_SESSION["user_email"] =  $row["userId"];
 	$_SESSION["user_type"] =  $row["userType"];
-	$_SESSION["user_balance"] =  $row["balance"];
 	$_SESSION["username"] =  $row["userType"];
 	
 echo "success";
