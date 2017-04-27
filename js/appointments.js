@@ -27,18 +27,6 @@ $(function()
 	});
 });
 
-function fadeINContainer()
-{
-	$(".container").css("opacity", "1");
-	$(".container").css("transform", "translateZ(0px)");
-}
-
-function fadeOUTContainer()
-{
-	$(".container").css("transform", "translateZ(-50px)");
-	$(".container").css("opacity", "0");
-}
-
 function setNewButtonEvent()
 {
 	$(".button").click(function()

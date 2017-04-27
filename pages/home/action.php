@@ -5,6 +5,7 @@
 		if($_GET["page"] == "addStudent")
 		{
 			?>
+			It works!
 			<?php
 		}
 		

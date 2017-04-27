@@ -62,6 +62,18 @@ function Toast(message)
 	});
 }
 
+function fadeINContainer()
+{
+	$(".container").css("opacity", "1");
+	$(".container").css("transform", "translateZ(0px)");
+}
+
+function fadeOUTContainer()
+{
+	$(".container").css("transform", "translateZ(-50px)");
+	$(".container").css("opacity", "0");
+}
+
 
 function buttonClicked()
 {
@@ -69,25 +81,30 @@ function buttonClicked()
 	
 	if(id == "performStudentButton")
 	{
-		var selectedAction = $("#studentDropdown").val();
-		if(selectedAction == "Add new student")
+		fadeOUTContainer();
+		setTimeout(function()
 		{
-			
-		}
+			var selectedAction = $("#studentDropdown").val();
+			if(selectedAction == "Add new student")
+			{
+				location = "home.php?page=addStudent";
+			}
 		
-		else if(selectedAction == "Edit student")
-		{
-			
-		}
+			else if(selectedAction == "Edit student")
+			{
+				location = "home.php?page=searchStudent&action=edit";
+			}
 		
-		else if(selectedAction == "Delete student")
-		{
-			
-		}
+			else if(selectedAction == "Delete student")
+			{
+				location = "home.php?page=searchStudent&action=delete";
+			}
 		
-		else if(selectedAction == "Display student")
-		{
-			
-		}
+			else if(selectedAction == "Display student")
+			{
+				location = "home.php?page=searchStudent&action=display";
+			}
+		}, 750);
+		
 	}
 }

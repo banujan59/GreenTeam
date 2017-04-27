@@ -86,6 +86,39 @@
 					
 				}
 				
+				else if($_GET["page"] == "addStudent")
+				{
+					?>
+						<script>
+							var page = "<?php echo $_GET["page"] ?>";
+							$(".container").load("pages/home/action.php?page=" + page);
+						</script>
+					<?php
+				}
+				
+				else if($_GET["page"] == "searchStudent")
+				{
+					if(isset($_GET["action"]) )
+					{
+						?>
+							<script>
+								var page = "<?php echo $_GET["page"] ?>";
+								var action = "<?php echo $_GET["action"] ?>";
+								$(".container").load("pages/home/action.php?page=" + page + "&action=" + action);
+							</script>
+						<?php
+					}
+					
+					else
+					{
+						?>
+							<script>
+								location = "home.php";
+							</script>
+						<?php
+					}
+				}
+				
 				else
 				{
 					?>
