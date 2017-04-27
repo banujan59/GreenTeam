@@ -127,21 +127,22 @@ session_start();
                 
                 <div class="news">
 	                <p>
-                    	<b>Monday April 17th 2017</b>
+                    	<b>Monday, April 17<sup>th</sup>, 2017</b>
                         	<br/>
                          Easter Holiday - School will be closed
                     </p>
                     	<hr/>
 					<p>
-                    	<b>Friday April 14th 2017</b>
+                    	<b>Friday, April 14<sup>th</sup>, 2017</b>
                         	<br/>
                          Good Friday - School will be closed
                     </p>
 	                    <hr/>
                     <p>
-                    	<b>Thursday April 13th 2017</b>
+                    	<b>Thursday, April 13<sup>th</sup>, 2017</b>
                         	<br/>
                          You have 1 new message from your teacher.
+						 <!--Remember, the '1' in the above line must be a changeable int value.-->
                     </p>
                     	<hr/>
                     <p>
