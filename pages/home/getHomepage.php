@@ -24,7 +24,8 @@ session_start();
 				die("Connection failed: " . $conn->connect_error);
 			} 
 			$studentid = $_SESSION["user_studentid"];
-			$sql = "SELECT balance FROM students WHERE studentId = '".$studentid."'";
+			$sql = "SELECT balance, type, day, dayStart,dayEnd FROM students INNER JOIN course ON course.courseId=students.courseId INNER JOIN schedule ON schedule.scheduleId=course.scheduleId where students.studentId ='".$studentid."'";
+			//$sql = "SELECT stud.balance, c.type, s.day, s.dayStart, s.dayEnd FROM course c, schedule s, students stud where (stud.studentId = 2) AND (s.scheduleId = c.scheduleId) AND (stud.courseId = c.courseId)";
 			$result = $conn->query($sql);
 
 			if ($result->num_rows > 0) {
