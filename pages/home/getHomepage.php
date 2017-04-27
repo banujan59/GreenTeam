@@ -23,18 +23,15 @@ session_start();
 			if ($conn->connect_error) {
 				die("Connection failed: " . $conn->connect_error);
 			} 
-
-			$sql = "SELECT balance FROM students WHERE students = '".$_SESSION["user_studentid"]."'";
+			$studentid = $_SESSION["user_studentid"];
+			$sql = "SELECT balance FROM students WHERE studentId = '".$studentid."'";
 			$result = $conn->query($sql);
 
 			if ($result->num_rows > 0) {
 				// output data of each row
 				$row = $result->fetch_assoc();
 				
-				// GET ALL THE USER INFOS AND STORE THEM IN THE SESSION
-				session_start();
-				$_SESSION["user_balance"] =  $row["userId"];
-				 echo "session started";
+				$_SESSION["user_balance"] =  $row["balance"];
 				
 			}
 			?>
