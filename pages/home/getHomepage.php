@@ -43,7 +43,7 @@ session_start();
                 <div class="sectionContent">
                 	<h4>Payment Status</h4>
                 	<p>
-                    	Account balance: <b><span class="accountBalanceValue">$200.00</span></b>.
+                    	Account balance: <b><span class="accountBalanceValue"><?php echo $_SESSION["user_balance"];?></span></b>.
                        	<br/>
                         Come to driving school to pay.
                     </p>
@@ -213,78 +213,78 @@ session_start();
                 	<div class="blockInnerContainer">
     	            	<!-- Show the 7 latest events only -->
 	                	<div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
+                        	<div class="blockHeader"><h3>Monday</h3></div>
                             <div class="blockContent">
                             	<p>
-                                	<b>Event Name</b>
+                                	<b>No class</b>
                                     	<br/><br/>
-                                    Short Event Description
+                                   
                                 </p>
                             </div>
         	            </div>
                     
             	        <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
+                        	<div class="blockHeader"><h3>Tuesday</h3></div>
                             <div class="blockContent">
                             	<p>
-                                	<b>Event Name</b>
+                                	<b>No class</b>
                                     	<br/><br/>
-                                    Short Event Description
+                                  
                                 </p>
                             </div>
         	            </div>
                     
                     	<div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
+                        	<div class="blockHeader"><h3>Wednesday</h3></div>
                             <div class="blockContent">
                             	<p>
-                                	<b>Event Name</b>
+                                	<b>No class</b>
                                     	<br/><br/>
-                                    Short Event Description
+                                  
                                 </p>
                             </div>
         	            </div>
     	                
         	            <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
+                        	<div class="blockHeader"><h3>Thursday</h3></div>
                             <div class="blockContent">
                             	<p>
-                                	<b>Event Name</b>
+                                	<b>No class</b>
                                     	<br/><br/>
-                                    Short Event Description
+                                  
                                 </p>
                             </div>
         	            </div>
                     
                 	    <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
+                        	<div class="blockHeader"><h3>Friday</h3></div>
                             <div class="blockContent">
                             	<p>
-                                	<b>Event Name</b>
+                                	<b>No class</b>
                                     	<br/><br/>
-                                    Short Event Description
+                                   
                                 </p>
                             </div>
         	            </div>
                         
                         <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
+                        	<div class="blockHeader"><h3>Saturday</h3></div>
                             <div class="blockContent">
                             	<p>
-                                	<b>Event Name</b>
+                                	<b>No class</b>
                                     	<br/><br/>
-                                    Short Event Description
+                                  
                                 </p>
                             </div>
         	            </div>
                         
                         <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
+                        	<div class="blockHeader"><h3>Sunday</h3></div>
                             <div class="blockContent">
                             	<p>
-                                	<b>Event Name</b>
+                                	<b>No class</b>
                                     	<br/><br/>
-                                    Short Event Description
+                                    
                                 </p>
                             </div>
         	            </div>
