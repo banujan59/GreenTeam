@@ -94,7 +94,6 @@ function buttonClicked()
 		
 		$.post("pages/login/userLogin.php", {"email" : email, "pwd" : pwd}, function(data)
 			{
-				window.alert(data);
 				if(data == "success")
 				{
 					$(document.body).fadeOut(500, function()
