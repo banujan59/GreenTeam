@@ -34,6 +34,7 @@ session_start();
 				$_SESSION["user_balance"] =  $row["balance"];
 				
 			}
+			$conn->close();
 			?>
 				<section class="notifications">
             	<div class="sectionHeader">
