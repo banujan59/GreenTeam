@@ -9,11 +9,11 @@
 $dbusername = "root";
 $dbpassword = "";
 $dbname = "universaldb";
-       // $name = $_POST["email"]; 
-       // $password = $_POST["pwd"]; 
+       $name = $_POST["email"]; 
+       $password = $_POST["pwd"]; 
 	   
-	    $name = "admin"; 
-        $password = "admin"; 
+	   // $name = "admin"; 
+       // $password = "admin"; 
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 // Check connection
@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
     echo "wrong user password combo";
 }
 $conn->close();
-	
+	}
 	else
 	{
 		echo "fail";
