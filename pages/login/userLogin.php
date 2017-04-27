@@ -14,6 +14,7 @@ $dbname = "universaldb";
 	   
 	    //$name = "admin"; 
         //$password = "admin"; 
+
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 // Check connection
@@ -21,7 +22,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT username, userId, userType FROM users WHERE username = '".$name."' AND  password = '".$password."'";
+$sql = "SELECT username, userId, userType, balance FROM users WHERE username = '".$name."' AND  password = '".$password."'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -30,17 +31,18 @@ if ($result->num_rows > 0) {
 	
 	// GET ALL THE USER INFOS AND STORE THEM IN THE SESSION
     session_start();
-    $_SESSION["user_id"] =  $row["userId"];
+    $_SESSION["user_email"] =  $row["userId"];
 	$_SESSION["user_type"] =  $row["userType"];
+	$_SESSION["user_balance"] =  $row["balance"];
 	$_SESSION["username"] =  $row["userType"];
 	
-	 echo "session started";
+echo "success";
 	
 } else {
     echo "wrong user password combo";
 }
 $conn->close();
-	
+	}
 	else
 	{
 		echo "fail";
