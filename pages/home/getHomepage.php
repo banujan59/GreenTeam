@@ -1,5 +1,9 @@
 <?php
 session_start();	
+	$servername = "localhost";
+	$dbusername = "root";
+	$dbpassword = "";
+	$dbname = "universaldb";
 	if( isset($_SESSION["user_type"]) )
 	{
 			?>
@@ -13,6 +17,27 @@ session_start();
 			if($_SESSION["user_type"] == "student")
 			{
 				?>
+			<?php
+			$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+			// Check connection
+			if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+			} 
+
+			$sql = "SELECT balance FROM students WHERE students = '".$_SESSION["user_studentid"]."'";
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0) {
+				// output data of each row
+				$row = $result->fetch_assoc();
+				
+				// GET ALL THE USER INFOS AND STORE THEM IN THE SESSION
+				session_start();
+				$_SESSION["user_balance"] =  $row["userId"];
+				 echo "session started";
+				
+			}
+			?>
 				<section class="notifications">
             	<div class="sectionHeader">
 					<h2>Notifications</h2>
