@@ -25,14 +25,17 @@ session_start();
 			} 
 			$studentid = $_SESSION["user_studentid"];
 			$sql = "SELECT balance, type, day, dayStart,dayEnd FROM students INNER JOIN course ON course.courseId=students.courseId INNER JOIN schedule ON schedule.scheduleId=course.scheduleId where students.studentId ='".$studentid."'";
-			//$sql = "SELECT stud.balance, c.type, s.day, s.dayStart, s.dayEnd FROM course c, schedule s, students stud where (stud.studentId = 2) AND (s.scheduleId = c.scheduleId) AND (stud.courseId = c.courseId)";
-			$result = $conn->query($sql);
+		    $result = $conn->query($sql);
 
 			if ($result->num_rows > 0) {
 				// output data of each row
 				$row = $result->fetch_assoc();
 				
 				$_SESSION["user_balance"] =  $row["balance"];
+				$_SESSION["user_coursetype"] =  $row["type"];
+				$_SESSION["user_courseday"] =  $row["day"];
+				$_SESSION["user_coursedaystart"] =  $row["dayStart"];
+				$_SESSION["user_coursedayend"] =  $row["dayEnd"];
 				
 			}
 			$conn->close();
@@ -212,84 +215,31 @@ session_start();
 					<h2>What's on your schedule?</h2>
                 </div>
                 <div class="blockContainer">
-                	<div class="blockInnerContainer">
+                	<div id="blockInnerContainerList" class="blockInnerContainer">
     	            	<!-- Show the 7 latest events only -->
-	                	<div class="block">
-                        	<div class="blockHeader"><h3>Monday</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>No class</b>
-                                    	<br/><br/>
-                                   
-                                </p>
-                            </div>
-        	            </div>
-                    
-            	        <div class="block">
-                        	<div class="blockHeader"><h3>Tuesday</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>No class</b>
-                                    	<br/><br/>
-                                  
-                                </p>
-                            </div>
-        	            </div>
-                    
-                    	<div class="block">
-                        	<div class="blockHeader"><h3>Wednesday</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>No class</b>
-                                    	<br/><br/>
-                                  
-                                </p>
-                            </div>
-        	            </div>
-    	                
-        	            <div class="block">
-                        	<div class="blockHeader"><h3>Thursday</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>No class</b>
-                                    	<br/><br/>
-                                  
-                                </p>
-                            </div>
-        	            </div>
-                    
-                	    <div class="block">
-                        	<div class="blockHeader"><h3>Friday</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>No class</b>
-                                    	<br/><br/>
-                                   
-                                </p>
-                            </div>
-        	            </div>
-                        
-                        <div class="block">
-                        	<div class="blockHeader"><h3>Saturday</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>No class</b>
-                                    	<br/><br/>
-                                  
-                                </p>
-                            </div>
-        	            </div>
-                        
-                        <div class="block">
-                        	<div class="blockHeader"><h3>Sunday</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>No class</b>
-                                    	<br/><br/>
-                                    
-                                </p>
-                            </div>
-        	            </div>
+						<script>
+						var script1 = "";
+						var day = "<?php echo $_SESSION["user_courseday"]?>";
+						var coursetype = "<?php echo $_SESSION["user_coursetype"]?>";
+						var coursestart = "<?php 
+						$dt = DateTime::createFromFormat("Y-m-d H:i:s", $_SESSION["user_coursedaystart"]);
+                        $hours = $dt->format('H:i');
+						echo $hours?>";
+						var courseend = "<?php
+						$dt = DateTime::createFromFormat("Y-m-d H:i:s", $_SESSION["user_coursedayend"]);
+                        $hours = $dt->format('H:i');
+						echo $hours?>";
+						var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"];
+						for(i = 0; i < days.length; i++){
+							
+						if(days[i] == day ) {
+								 script1 +="<div class='block'><div class='blockHeader'><h3>"+days[i]+"</h3></div><div class='blockContent'><p><b>"+coursetype+" Licence</b><br/>Theory Class<br>"+coursestart+" to "+courseend+"<br/></p></div></div>";
+						} else {
+	                	 script1 +="<div class='block'><div class='blockHeader'><h3>"+days[i]+"</h3></div><div class='blockContent'><p><b>No class on this day.</b><br/><br/></p></div></div>";
+						}}
+						document.getElementById("blockInnerContainerList").innerHTML = script1;
+                    </script>
+            	        
                     </div>
                 </div>
             </section>
