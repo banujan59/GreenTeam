@@ -1,34 +1,58 @@
-<?php
-	session_start();
-	if( isset($_GET["page"]) )
-	{
+		<?php
+		session_start();
+		if( isset($_GET["page"]) )
+		{
 		if($_GET["page"] == "addStudent")
 		{
 			?>
+			<style>
+				.button
+				{
+					position: relative;
+				}
+				
+				#cancelButton
+				{
+					margin-top: -20px;
+				}
+			</style>
+		
 			<div class="col-md-12">
 						<section> 
 							<div class="sectionHeader">
-								<h2>Add Student to database</h2>
 								<h2>Add student to database</h2>
 							</div>
 							
 							<!-- The form -->
+							
+							<br/>
+							
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
 											<label>First Name:</label>
 										</div>
 										<div class="col-md-3">
-											<input type="text" name="fname"/>
 											<input type="text" name="fname" placeholder="Banujan"/>
 										</div>
-								</div><!-- End row -->
+								</div><!-- End row -->		
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
 											<label>Last Name:</label>
 										</div>
 										<div class="col-md-3">
-											<input type="text" name="lname"/>
 											<input type="text" name="lname" placeholder="Atputhawhatever"/>
 										</div>
 								</div><!-- End row -->
 								
 								<br/>
+								
 								<div class="row" style="height:37.37166324435318%;">
 									<div class="col-md-4"></div>
 									
@@ -138,14 +162,16 @@
 								
 								<br/>
 								
-								<div id="confirmButton" class="button" style="margin: 10px 395px">CONFIRM</div>
-								<div id="cancelButton" class="button" style="margin: 10px 595px">CANCEL</div>
+								<div id="confirmButton" class="button" style="margin: 15px 395px">CONFIRM</div>
+								<div id="cancelButton" class="button" style="margin: 15px 595px">CANCEL</div>
 								
 								</form>
 							</div>
 						</section>
 			<?php
+
 		}
+
 		
 		else if($_GET["page"] == "searchStudent")
 		{
@@ -353,3 +379,4 @@
 		}
 	}
 ?>
+

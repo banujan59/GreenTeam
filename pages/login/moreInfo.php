@@ -1,7 +1,7 @@
 <p>
 	<div id="backButton" class="button">Back</div>
 	<script>$("#backButton").click(buttonClicked);</script>
-	We are located near Côte-Vertu Metro Station at 1485 Macdonald st. St Laurent Qc H4L 2A8 
+	We are located near Côte-Vertu Metro Station at 1485 Rue MacDonald, St.-Laurent, Québec H4L 2A8 
 	<br/>
 	Room # 203
 	<br/>
