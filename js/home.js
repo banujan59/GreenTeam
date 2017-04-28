@@ -87,7 +87,7 @@ function buttonClicked()
 			var selectedAction = $("#studentDropdown").val();
 			if(selectedAction == "Add new student")
 			{
-				location = "home.php?page=addStudent";
+				location = "home.php?page=studentInfoForm&action=add";
 			}
 		
 			else if(selectedAction == "Edit student")

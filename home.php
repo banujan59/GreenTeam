@@ -86,12 +86,13 @@
 					
 				}
 				
-				else if($_GET["page"] == "addStudent")
+				else if($_GET["page"] == "studentInfoForm")
 				{
 					?>
 						<script>
 							var page = "<?php echo $_GET["page"] ?>";
-							$(".container").load("pages/home/action.php?page=" + page);
+							var action = "<?php echo $_GET["action"] ?>";
+							$(".container").load("pages/home/action.php?page=" + page + "&action=" + action);
 						</script>
 					<?php
 				}
