@@ -1,5 +1,9 @@
 <?php
 session_start();	
+	$servername = "localhost";
+	$dbusername = "root";
+	$dbpassword = "";
+	$dbname = "universaldb";
 	if( isset($_SESSION["user_type"]) )
 	{
 			?>
@@ -13,6 +17,29 @@ session_start();
 			if($_SESSION["user_type"] == "student")
 			{
 				?>
+			<?php
+			$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+			// Check connection
+			if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+			} 
+			$studentid = $_SESSION["user_studentid"];
+			$sql = "SELECT balance, type, day, dayStart,dayEnd FROM students INNER JOIN course ON course.courseId=students.courseId INNER JOIN schedule ON schedule.scheduleId=course.scheduleId where students.studentId ='".$studentid."'";
+		    $result = $conn->query($sql);
+
+			if ($result->num_rows > 0) {
+				// output data of each row
+				$row = $result->fetch_assoc();
+				
+				$_SESSION["user_balance"] =  $row["balance"];
+				$_SESSION["user_coursetype"] =  $row["type"];
+				$_SESSION["user_courseday"] =  $row["day"];
+				$_SESSION["user_coursedaystart"] =  $row["dayStart"];
+				$_SESSION["user_coursedayend"] =  $row["dayEnd"];
+				
+			}
+			$conn->close();
+			?>
 				<section class="notifications">
             	<div class="sectionHeader">
 					<h2>Notifications</h2>
@@ -20,7 +47,7 @@ session_start();
                 <div class="sectionContent">
                 	<h4>Payment Status</h4>
                 	<p>
-                    	Account balance: <b><span class="accountBalanceValue">$200.00</span></b>.
+                    	Account balance: <b><span class="accountBalanceValue"><?php echo $_SESSION["user_balance"];?></span></b>.
                        	<br/>
                         Come to driving school to pay.
                     </p>
@@ -127,21 +154,22 @@ session_start();
                 
                 <div class="news">
 	                <p>
-                    	<b>Monday April 17th 2017</b>
+                    	<b>Monday, April 17<sup>th</sup>, 2017</b>
                         	<br/>
                          Easter Holiday - School will be closed
                     </p>
                     	<hr/>
 					<p>
-                    	<b>Friday April 14th 2017</b>
+                    	<b>Friday, April 14<sup>th</sup>, 2017</b>
                         	<br/>
                          Good Friday - School will be closed
                     </p>
 	                    <hr/>
                     <p>
-                    	<b>Thursday April 13th 2017</b>
+                    	<b>Thursday, April 13<sup>th</sup>, 2017</b>
                         	<br/>
                          You have 1 new message from your teacher.
+						 <!--Remember, the '1' in the above line must be a changeable int value.-->
                     </p>
                     	<hr/>
                     <p>
@@ -187,84 +215,31 @@ session_start();
 					<h2>What's on your schedule?</h2>
                 </div>
                 <div class="blockContainer">
-                	<div class="blockInnerContainer">
+                	<div id="blockInnerContainerList" class="blockInnerContainer">
     	            	<!-- Show the 7 latest events only -->
-	                	<div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>Event Name</b>
-                                    	<br/><br/>
-                                    Short Event Description
-                                </p>
-                            </div>
-        	            </div>
-                    
-            	        <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>Event Name</b>
-                                    	<br/><br/>
-                                    Short Event Description
-                                </p>
-                            </div>
-        	            </div>
-                    
-                    	<div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>Event Name</b>
-                                    	<br/><br/>
-                                    Short Event Description
-                                </p>
-                            </div>
-        	            </div>
-    	                
-        	            <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>Event Name</b>
-                                    	<br/><br/>
-                                    Short Event Description
-                                </p>
-                            </div>
-        	            </div>
-                    
-                	    <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>Event Name</b>
-                                    	<br/><br/>
-                                    Short Event Description
-                                </p>
-                            </div>
-        	            </div>
-                        
-                        <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>Event Name</b>
-                                    	<br/><br/>
-                                    Short Event Description
-                                </p>
-                            </div>
-        	            </div>
-                        
-                        <div class="block">
-                        	<div class="blockHeader"><h3>Date</h3></div>
-                            <div class="blockContent">
-                            	<p>
-                                	<b>Event Name</b>
-                                    	<br/><br/>
-                                    Short Event Description
-                                </p>
-                            </div>
-        	            </div>
+						<script>
+						var script1 = "";
+						var day = "<?php echo $_SESSION["user_courseday"]?>";
+						var coursetype = "<?php echo $_SESSION["user_coursetype"]?>";
+						var coursestart = "<?php 
+						$dt = DateTime::createFromFormat("Y-m-d H:i:s", $_SESSION["user_coursedaystart"]);
+                        $hours = $dt->format('H:i');
+						echo $hours?>";
+						var courseend = "<?php
+						$dt = DateTime::createFromFormat("Y-m-d H:i:s", $_SESSION["user_coursedayend"]);
+                        $hours = $dt->format('H:i');
+						echo $hours?>";
+						var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"];
+						for(i = 0; i < days.length; i++){
+							
+						if(days[i] == day ) {
+								 script1 +="<div class='block'><div class='blockHeader'><h3>"+days[i]+"</h3></div><div class='blockContent'><p><b>"+coursetype+" Licence</b><br/>Theory Class<br>"+coursestart+" to "+courseend+"<br/></p></div></div>";
+						} else {
+	                	 script1 +="<div class='block'><div class='blockHeader'><h3>"+days[i]+"</h3></div><div class='blockContent'><p><b>No class on this day.</b><br/><br/></p></div></div>";
+						}}
+						document.getElementById("blockInnerContainerList").innerHTML = script1;
+                    </script>
+            	        
                     </div>
                 </div>
             </section>
