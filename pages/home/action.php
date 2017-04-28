@@ -9,11 +9,7 @@
 				.button
 				{
 					position: relative;
-				}
-				
-				#cancelButton
-				{
-					margin-top: -20px;
+					margin-right: 15px;
 				}
 			</style>
 		
@@ -122,19 +118,6 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Course Time:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="time" name="studentCourseTime"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
 											<label>Course Type:</label>
 										</div>
 										<div class="col-md-3">
@@ -162,8 +145,10 @@
 								
 								<br/>
 								
-								<div id="confirmButton" class="button" style="margin: 15px 395px">CONFIRM</div>
-								<div id="cancelButton" class="button" style="margin: 15px 595px">CANCEL</div>
+								<div class="btn-group" style="margin: 12px 385px">
+								  <button class="button">CONFIRM</button>
+								  <button class="button">CANCEL</button>
+								</div>
 								
 								</form>
 							</div>
