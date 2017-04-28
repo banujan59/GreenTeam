@@ -217,11 +217,25 @@
 				</style>
 				
 				<script>
-					$(function()
+					// object of type student
+					function student(id, fname, lname, phone, emergencyPhone, bday, balance, balanceDueDate, courseID)
 					{
-						// object of type student
-						var student;
-						
+						this.studentId = id;
+						this.firstName = fname;
+						this.lastName = lname;
+						this.phone = phone;
+						this.emergencyPhoneNumber = emergencyPhone;
+						this.birthdate = bday;
+						this.balance = balance;
+						this.balanceDueDate = balanceDueDate;
+						this.courseID = courseID;
+					}
+					
+					// array that will contain all students
+					var allStudents[];
+					
+					$(function()
+					{	
 						// event handler for search box
 						$("input[name=searchField]").keyup(function(e)
 						{
@@ -356,6 +370,20 @@
 																		<td><?php echo $row["balanceDueDate"]; ?></td>
 																		<td><?php echo $row["courseID"]; ?></td>
 																	</tr>
+																	
+																	<script>
+																		allStudents[allStudents.length] = new student(
+																			"<?php echo $row["studentId"]; ?>",
+																			"<?php echo $row["firstName"]; ?>", 
+																			"<?php echo $row["lastName"]; ?>", 
+																			"<?php echo $row["phoneNumber"]; ?>", 
+																			"<?php echo $row["emergencyPhoneNumber"]; ?>", 
+																			"<?php echo $row["birthdate"]; ?>", 
+																			"<?php echo $row["balance"]; ?>",
+																			"<?php echo $row["balanceDueDate"]; ?>",
+																			"<?php echo $row["courseID"]; ?>"
+																		);
+																	</script>
 																<?php
 															}
 	
