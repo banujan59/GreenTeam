@@ -261,9 +261,7 @@
 										<div class="col-md-2">
 											<label>First Name:</label>
 										</div>
-										<div class="col-md-3">
-											<input type="text" name="fname" placeholder="Banujan"/>
-										</div>
+										<div id="firstNameContainer" class="col-md-3"></div>
 								</div><!-- End row -->		
 								
 								<br/>
@@ -274,9 +272,7 @@
 										<div class="col-md-2">
 											<label>Last Name:</label>
 										</div>
-										<div class="col-md-3">
-											<input type="text" name="lname" placeholder="Atputhawhatever"/>
-										</div>
+										<div id="lastNameContainer" class="col-md-3"></div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -287,9 +283,7 @@
 										<div class="col-md-2">
 											<label>Phone Number:</label>
 										</div>
-										<div class="col-md-3">
-											<input type="tel" name="studentPhone" placeholder="514-123-4567"/>
-										</div>
+										<div id="phoneContainer" class="col-md-3"></div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -300,9 +294,7 @@
 										<div class="col-md-2">
 											<label>Emergency Contact:</label>
 										</div>
-										<div class="col-md-3">
-											<input type="tel" name="studentEC" placeholder="450-987-6543"/>
-										</div>
+										<div id="emerPhoneContainer" class="col-md-3"></div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -313,9 +305,7 @@
 										<div class="col-md-2">
 											<label>Email Address:</label>
 										</div>
-										<div class="col-md-3">
-											<input type="email" name="studentEmail" placeholder="banuthegreat@gmail.com"/>
-										</div>
+										<div id="emailContainer" class="col-md-3"></div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -326,9 +316,7 @@
 										<div class="col-md-2">
 											<label>Home Address:</label>
 										</div>
-										<div class="col-md-3">
-											<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>
-										</div>
+										<div id="addressContainer" class="col-md-3"></div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -339,9 +327,7 @@
 										<div class="col-md-2">
 											<label>Date of Birth:</label>
 										</div>
-										<div class="col-md-3">
-											<input type="date" name="studentBD"/>
-										</div>
+										<div id="bdayContainer" class="col-md-3"></div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -352,10 +338,7 @@
 										<div class="col-md-2">
 											<label>Course Type:</label>
 										</div>
-										<div class="col-md-3">
-											<input type="radio" name="studentCourseType" value="trucks"/> Class 3 - Trucks </br>
-											<input type="radio" name="studentCourseType" value="regularVehicles" checked/> Class 5 - Regular Vehicles
-										</div>
+										<div id="courseTypeContainer" class="col-md-3"></div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -366,21 +349,88 @@
 										<div class="col-md-2">
 											<label>Language of Preference:</label>
 										</div>
-										<div class="col-md-3">
-											<select>
-											  <option value="eng">English</option>
-											  <option value="fre">French</option>
-											  <option value="tam">Tamil</option>
-											</select>
-										</div>
+										<div id="languageContainer" class="col-md-3"></div>
 								</div><!-- End row -->
 								
 								<br/>
 								
 								<div class="btn-group" style="margin: 12px 385px">
-								  <button class="button">CONFIRM</button>
-								  <button class="button">CANCEL</button>
+								  <button id="confirmButton" class="button">Confirm</button>
+								  <button id="cancelButton" class="button">Cancel</button>
 								</div>
+								
+								
+								<?php
+									if($_GET["action"] == "add" || $_GET["action"] == "edit")
+									{
+										?>
+											<script>
+												$("#firstNameContainer").html('<input type="text" name="fname" placeholder="Enter student\'s first name"/>');
+												$("#lastNameContainer").html('<input type="text" name="lname" placeholder="Enter student\'s last name"/>');
+												$("#phoneContainer").html('<input type="tel" name="studentPhone" placeholder="514-123-4567"/>');
+												$("#emerPhoneContainer").html('<input type="tel" name="studentEC" placeholder="514-123-4567"/>');
+												$("#emailContainer").html('<input type="email" name="studentEmail" placeholder="banuthegreat@gmail.com"/>');
+												$("#addressContainer").html('<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>');
+												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
+												$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="1"/> Class 3 - Trucks </br>' +
+																				'<input type="radio" name="studentCourseType" value="2" checked/> Class 5 - Regular Vehicles');
+												$("#languageContainer").html('<select>'+
+																				'<option value="eng">English</option>' +
+																				'<option value="fre">French</option>'+
+																				'<option value="tam">Tamil</option>'+
+																			'</select>');
+											</script>
+										<?php
+										
+										if($_GET["action"] == "edit")
+										{
+											?>
+											<script>
+											var id = "<?php echo $_GET['studentID'];?>";
+												$.post("pages/home/getStudentInfo.php", {operation : "get", studentID : id}, function(data)
+												{
+													var json = $.parseJSON(data);
+													
+													$("input[name=fname]").val(json[0].firstName);
+													$("input[name=lname]").val(json[0].lastName);
+													$("input[name=studentPhone]").val(json[0].phoneNumber);
+													$("input[name=studentEC]").val(json[0].emergencyPhoneNumber);
+													$("input[name=studentEmail]").val(json[0].email);
+													$("input[name=studentAddress]").val(json[0].address);
+													$("input[name=studentBD]").val(json[0].birthdate);
+													$("input[name=fname]").val(json[0].balance);
+													$("input[name=fname]").val(json[0].balanceDueDate);
+													$("input[name=studentCourseType]:checked").val(json[0].courseID);
+													$("select").val(json[0].language);
+												});
+											</script>
+											<?php
+										}
+										
+									}
+									
+									else if($_GET["action"] == "delete" || $_GET["action"] == "display")
+									{
+										?>
+											<script>
+												$("firstNameContainer").html('');
+												$("lastNameContainer").html('');
+												$("phoneContainer").html('');
+												$("emerPhoneContainer").html('');
+												$("emailContainer").html('');
+												$("addressContainer").html('');
+												$("bdayContainer").html('');
+												$("courseTypeContainer").html('');
+												$("languageContainer").html('');
+											</script>
+										<?php
+									}
+								?>
+								
+								
+								<script>
+									$(".button").click(buttonClicked);
+								</script>
 								
 								</form>
 							</div>

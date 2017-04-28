@@ -107,4 +107,20 @@ function buttonClicked()
 		}, 750);
 		
 	}
+	
+	// for the confirm button on the student info form
+	else if(id == "confirmButton")
+	{
+		
+	}
+	
+	// for the cancel button on the student info form
+	else if(id == "cancelButton")
+	{
+		fadeOUTContainer();
+		setTimeout(function()
+		{
+			location = "home.php";
+		}, 750);
+	}
 }
