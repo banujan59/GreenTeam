@@ -5,6 +5,18 @@
 		if($_GET["page"] == "addStudent")
 		{
 			?>
+			<style>
+				.button
+				{
+					position: relative;
+				}
+				
+				#cancelButton
+				{
+					margin-top: -20px;
+				}
+			</style>
+		
 			<div class="col-md-12">
 						<section> 
 							<div class="sectionHeader">
