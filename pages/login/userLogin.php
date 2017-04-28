@@ -22,7 +22,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT username, userId, userType, studentId FROM users WHERE username = '".$name."' AND  password = '".$password."'";
+$sql = "SELECT email, userType, studentId FROM users WHERE email = '".$name."' AND  password = '".$password."'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -31,9 +31,8 @@ if ($result->num_rows > 0) {
 	
 	// GET ALL THE USER INFOS AND STORE THEM IN THE SESSION
     session_start();
-    $_SESSION["user_email"] =  $row["userId"];
+    $_SESSION["user_email"] =  $row["email"];
 	$_SESSION["user_type"] =  $row["userType"];
-	$_SESSION["user_username"] =  $row["userType"];
 	$_SESSION["user_studentid"] =  $row["studentId"];
 	
 echo "success";
