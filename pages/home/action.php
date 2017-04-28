@@ -13,7 +13,7 @@
 							
 							<!-- The form -->
 							
-							</br>
+							<br/>
 							
 								<div class="row" style="height:37.37166324435318%;">
 									<div class="col-md-4"></div>
@@ -157,4 +157,214 @@
 							</div>
 						</section>
 			<?php
+
 		}
+
+		
+		else if($_GET["page"] == "searchStudent")
+		{
+			?>
+				<style>
+					.container
+					{
+						position:relative;
+						height: 80%;
+					}
+					
+					.row, .row div:not(.sectionHeader), .row section
+					{
+						height:100%;
+					}
+					
+					.selectHint
+					{
+						position: relative;
+						left: 30%;
+						color: gray;
+					}
+					
+					#tableContainer
+					{
+					    overflow-y: scroll;
+						height: 70%;
+						left: 0%;
+						position: absolute;
+					}
+					
+					tbody tr
+					{
+						transition: .5s;
+						cursor: pointer;
+					}
+					
+					tbody tr:hover
+					{
+						background-color: rgba(239, 48, 56, 0.5) !important;
+					}
+					
+				</style>
+				
+				<script>
+					$(function()
+					{
+						// object of type student
+						var student;
+						
+						// event handler for search box
+						$("input[name=searchField]").keyup(function(e)
+						{
+							
+						});
+					});
+				</script>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<section> 
+							<div class="sectionHeader">
+								<?php
+									if($_GET["action"] == "edit")
+									{
+										?>
+											<script>
+												var PAGE_ACTION = "edit";
+											</script>
+											<h2>Search student to edit</h2>
+										<?php
+									}
+									
+									else if($_GET["action"] == "delete")
+									{
+										?>
+											<script>
+												var PAGE_ACTION = "delete";
+											</script>
+											<h2>Search student to delete</h2>
+										<?php
+									}
+									
+									else if($_GET["action"] == "display")
+									{
+										?>
+											<script>
+												var PAGE_ACTION = "display";
+											</script>
+											<h2>Search student to display</h2>
+										<?php
+									}
+								?>
+							</div>
+							
+							<!-- The form -->
+							<br/>
+							<div class="form">
+								<form>
+									<div class="row" style="height:37.37166324435318%;">
+										<div class="col-md-2"></div> <!-- End col -->
+										<div class="col-md-2">
+											<label>Search by:</label>
+										</div> <!-- End col -->
+										<div class="col-md-7">
+											<label class="radio-inline">
+												<input type="radio" name="searchCriteria" value="lname" checked>Last Name
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="searchCriteria" value="fname">First Name
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="searchCriteria" value="birthdate">Date of birth
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="searchCriteria" value="language">Language
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="searchCriteria" value="all">All
+											</label>
+										</div> <!-- End col -->
+									</div> <!-- End row -->
+										<br/><br/>
+									<div class="row" style="height:37.37166324435318%;">
+										<div class="col-md-2"></div> <!-- End col -->
+										<div class="col-md-8">
+											<input style="width:100%;" type="text" placeholder="Search student..." name="searchField"/>
+												<br/>
+											<div class="selectHint">Click on a table row to select a student.</div>
+										</div> <!-- End col -->
+									</div> <!-- End row -->
+									
+										<br/><br/>
+										
+									<div class="row" style="height:37.37166324435318%;">
+										<div class="col-md-2"></div> <!-- End col -->
+										<div id="tableContainer" class="col-md-12">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Student ID</th>
+														<th>First name</th>
+														<th>Last name</th>
+														<th>Phone number</th>
+														<th>Emergency number</th>
+														<th>Birthdate</th>
+														<th>Balance</th>
+														<th>Balance due date</th>
+														<th>Course ID</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+														$servername = "localhost";
+														$dbusername = "root";
+														$dbpassword = "";
+														$dbname = "universaldb";
+													
+														// Create connection
+														$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+														// Check connection
+														if ($conn->connect_error) {
+															die("Connection failed: " . $conn->connect_error);
+														} 
+	
+														$sql = "SELECT studentId, firstName, lastName, phoneNumber, emergencyPhoneNumber, birthdate, balance, balanceDueDate, courseID  FROM STUDENTS";
+														$result = $conn->query($sql);
+	
+														if ($result->num_rows > 0) {
+														// output data of each row
+															while($row = $result->fetch_assoc())
+															{
+																?>
+																	<tr id="<?php echo $row["studentId"];?>">
+																		<td><?php echo $row["studentId"]; ?></td>
+																		<td><?php echo $row["firstName"]; ?></td>
+																		<td><?php echo $row["lastName"]; ?></td>
+																		<td><?php echo $row["phoneNumber"]; ?></td>
+																		<td><?php echo $row["emergencyPhoneNumber"]; ?></td>
+																		<td><?php echo $row["birthdate"]; ?></td>
+																		<td><?php echo $row["balance"]; ?></td>
+																		<td><?php echo $row["balanceDueDate"]; ?></td>
+																		<td><?php echo $row["courseID"]; ?></td>
+																	</tr>
+																<?php
+															}
+	
+														} else {
+															echo "wrong user password combo";
+														}
+														$conn->close();
+													?>
+												</tbody>
+											</table>
+										</div> <!-- End col -->
+									</div> <!-- End row -->
+								</form>
+								
+								<br/><br/>
+							</div>
+						</section>
+					</div> <!-- End col -->
+				</div> <!-- End row -->
+			<?php
+		}
+	}
+?>
+

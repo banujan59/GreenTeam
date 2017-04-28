@@ -64,9 +64,10 @@
 	.loginForm input
 	{
 		position: relative;
-		background-color: rgba(30, 39, 142, 0.35);
+		background-color: rgba(30, 39, 142, 0.9);
 		/*border: solid rgba(255,255,255,0.75) 2px;*/
-		border: solid rgba(30, 39, 142, 0.75) 2px;
+		 border-radius: 5px;
+		border: solid rgba(30, 39, 142, 0.8) 2px;
 		padding-left: 5px;
 		padding-right: 5px;
 		color: white;
