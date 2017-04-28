@@ -239,9 +239,52 @@
 						// event handler for search box
 						$("input[name=searchField]").keyup(function(e)
 						{
+							e.preventDefault();
 							
+							var toSearch = $(this).val();
+							
+							// create the RegExp
+							pattern = new RegExp(toSearch, "i");
+		
+							// create an array to store search results
+							var results = [];
+		
+							// check each elements of the catalog for pattern
+							for(var i = 0 ; i < allStudents.length ; i++)
+							{
+								// store each string to serach in a variable
+								var lname = allStudents[i].lastName;
+								var fname = allStudents[i].firstName;
+								var bday = allStudents[i].birthdate;
+								//var language = allStudents[i].language;
+			
+								// perform the search....
+								if( (categoryName.search(pattern) != -1) || (description.search(pattern) != -1) ||
+									(name.search(pattern) != -1) || (supplier.search(pattern) != -1) )
+								{
+									// if match is found, then store current index to results array
+									results[results.length] = catalog[i];
+								}
+							}
+		
+							// if at least one match has been found, then show result in a table using showListOfProducts(var) function
+							if(results.length > 0)
+							{
+								displaySearchResult(results);
+							}
+		
+							// if no results have been found
+							else
+							{
+								$("tbody").html("<p>Sorry. No matches for your search. :(></p>");
+							}
 						});
 					});
+					
+					function displaySearchResult(result)
+					{
+						
+					}
 				</script>
 				
 				<div class="row">
@@ -299,9 +342,6 @@
 											</label>
 											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="birthdate">Date of birth
-											</label>
-											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="language">Language
 											</label>
 											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="all">All
