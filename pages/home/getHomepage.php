@@ -210,7 +210,7 @@ session_start();
             <div class="row">
             <div class="col-md-12">
             
-            <section style="margin-top:5%" class="scheduleViewer">
+            <section style="margin-top:5%;" class="scheduleViewer">
 			<?php
 			if($_SESSION["user_type"] == "student"){ 
 			?>
@@ -276,7 +276,7 @@ session_start();
 				<div class="sectionHeader">
 					<h2>Due balances</h2>
                 </div>
-                <div class="blockContainer">
+                <div class="blockContainer" >
                 	<div id="blockInnerContainerList" class="blockInnerContainer">
     	            	<!-- Show the 7 latest events only -->
 						<script>
