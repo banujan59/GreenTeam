@@ -254,7 +254,7 @@ session_start();
 				die("Connection failed: " . $conn->connect_error);
 			} 
 			$studentid = $_SESSION["user_studentid"];
-			$sql = "SELECT studentId, firstName, lastName, balance, phoneNumber, balanceDueDate FROM students where balanceDueDate < CURDATE() and balance > 0";
+			$sql = "SELECT studentId, firstName, lastName, balance, phoneNumber, balanceDueDate FROM students where balanceDueDate < CURDATE() and balance > 0 order by DATE_FORMAT(balanceDueDate, '%Y/%m/%d')";
 		    $result = $conn->query($sql);
 			$studentsids = array();
 			$students = array();
@@ -264,7 +264,10 @@ session_start();
 				} else {
 			 while($row = $result->fetch_assoc()) {
 				$studentsids[] = $row["studentId"];
-				$students[] = "Name: " . $row["firstName"] . " " . $row["lastName"] . " <br>Due Amount: $" . $row["balance"] . "<br>Due Date: " . $row["balanceDueDate"] . "<br>Phone Number: " . $row["phoneNumber"];
+				$date1=date_create($row["balanceDueDate"]);
+                $myDate = new DateTime();
+				$diff=date_diff($date1,$myDate);
+				$students[] = "Name: " . $row["firstName"] . " " . $row["lastName"] . " <br>Due Amount: $" . $row["balance"] . "<br>Due: " . $diff->days . " days ago<br>Due Date: " . $row["balanceDueDate"] . "<br>Phone Number: " . $row["phoneNumber"];
 				}}
 			
 			$conn->close();

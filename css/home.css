@@ -134,7 +134,7 @@ section
 {
 	position: relative;
 	display: inline-block;
-	width: 12.15277777777778%; /* around 175 px if inner container width is 150% of 960px */
+	width: 2.15277777777778%; /* around 175 px if inner container width is 150% of 960px */
 	height: 83.33333333333333%; /* around 175 px if inner container height is 230px */
 	border: solid 2px black;
 	margin: 5px 10px 0px 10px;
