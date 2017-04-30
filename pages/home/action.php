@@ -110,11 +110,12 @@
 											<label>Search by:</label>
 										</div> <!-- End col -->
 										<div class="col-md-7">
-											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="lname" checked>Last Name
-											</label>
+									
 											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="fname">First Name
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="searchCriteria" value="lname" checked>Last Name
 											</label>
 											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="birthdate">Date of birth
