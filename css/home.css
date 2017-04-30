@@ -251,6 +251,16 @@ input[type=radio], .radioText
 	box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
 }
 
+.criticalButton
+{
+	background-color: black;
+}
+
+.criticalButton:hover
+{
+	background-color: black;
+}
+
 /* Admin home page */
 .toolButtons
 {

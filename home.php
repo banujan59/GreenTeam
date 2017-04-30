@@ -92,9 +92,27 @@
 						<script>
 							var page = "<?php echo $_GET["page"] ?>";
 							var action = "<?php echo $_GET["action"] ?>";
-							$(".container").load("pages/home/action.php?page=" + page + "&action=" + action);
 						</script>
 					<?php
+					
+					if(!isset($_GET["studentID"]))
+					{
+						?>
+						<script>
+							$(".container").load("pages/home/action.php?page=" + page + "&action=" + action);
+						</script>
+						<?php
+					}
+					
+					else
+					{
+						?>
+						<script>
+							var id = "<?php echo $_GET["studentID"]?>";
+							$(".container").load("pages/home/action.php?page=" + page + "&action=" + action + "&studentID=" + id);
+						</script>
+						<?php
+					}
 				}
 				
 				else if($_GET["page"] == "searchStudent")

@@ -108,19 +108,147 @@ function buttonClicked()
 		
 	}
 	
-	// for the confirm button on the student info form
-	else if(id == "confirmButton")
+	// for the save button on the student info form
+	else if(id == "saveButton")
 	{
+		// get inputs
+		var fname = $("input[name=fname]").val();
+		var lname = $("input[name=lname]").val();
+		var phone = $("input[name=studentPhone]").val();
+		var emergencyPhone = $("input[name=studentEC]").val();
+		var email = $("input[name=studentEmail]").val();
+		var address = $("input[name=studentAddress]").val();
+		var bday = $("input[name=studentBD]").val();
+		var balance = $("input[name=balance]").val();
+		var balanceDueDate = $("input[name=balanceDueDate]").val();
+		var courseType = $("input[name=studentCourseType]:checked").val();
+		var language = $("select").val();
 		
+		var studentInfo = {
+			operation : "",
+			firstName : fname,
+			lastName : lname,
+			phoneNumber : phone,
+			emergencyPhoneNumber : emergencyPhone,
+			email : email,
+			address : address,
+			birthdate : bday,
+			balance : balance,
+			balanceDueDate : balanceDueDate,
+			courseID : courseType,
+			language : language
+		};
+		
+		if(ACTION == "add")
+		{
+			studentInfo.operation = "insert";
+			
+			$.post("pages/home/studentInfo.php", studentInfo, function(data)
+			{
+				window.alert(data);
+				if(data == "success")
+				{
+					showNoticeBox("The selected record was successfully added to the database!");
+				}
+				
+				else
+				{
+					showNoticeBox("Something went wrong... Please try again later.");
+				}
+			});
+		}
+		
+		else if(ACTION == "edit")
+		{
+			studentInfo.operation = "update";
+			studentInfo.studentID = STUDENT_ID;
+			
+			$.post("pages/home/studentInfo.php", studentInfo, function(data)
+			{
+				if(data == "success")
+				{
+					showNoticeBox("The selected record was successfully edited!");
+				}
+				
+				else
+				{
+					showNoticeBox("Something went wrong... Please try again later.");
+				}
+			});
+		}
+	}
+	
+	else if(id == "deleteButton")
+	{
+		if(ACTION == "delete") // Just for security purposes... Not sure if necessary. Will research when I'm sober ;)
+		{
+			$.post("pages/home/studentInfo.php", {operation : "delete", studentID : STUDENT_ID}, function(data)
+			{
+				window.alert(data);
+				if(data == "success")
+				{
+					showNoticeBox("The selected record was successfully deleted!");
+				}
+				
+				else
+				{
+					showNoticeBox("Something went wrong... Please try again later.");
+				}	
+			});
+		}
 	}
 	
 	// for the cancel button on the student info form
 	else if(id == "cancelButton")
 	{
+		var linkURL = $(this).attr("link");
 		fadeOUTContainer();
 		setTimeout(function()
 		{
-			location = "home.php";
+			location = linkURL;
 		}, 750);
 	}
+	
+	// the ok button in the notice box
+	else if(id == "okButton")
+	{
+		hideNoticeBox();
+		$("#cancelButton").trigger("click");
+	}
+}
+
+function showNoticeBox(message)
+{
+	var modalDiv = $("<div></div>");
+	modalDiv.addClass("modalDiv");
+	modalDiv.insertAfter($("nav"));
+	
+	// blur
+	$(".container").css(
+	{
+		"-webkit-filter" : "blur(5px)",
+		"-moz-filter" : "blur(5px)",
+		"-o-filter" : "blur(5px)",
+		"-ms-filter" : "blur(5px)",
+		"filter" : "blur(5px)"
+	});
+	
+	modalDiv.load("pages/home/confirmationBox.php", function()
+	{
+		$(".message").text(message);
+	});
+}
+
+function hideNoticeBox()
+{
+	$(".modalDiv").remove();
+	
+	$("#container").css(
+	{
+		"-webkit-filter" : "none",
+		"-moz-filter" : "none",
+		"-o-filter" : "none",
+		"-ms-filter" : "none",
+		"filter" : "none"
+	});
 }

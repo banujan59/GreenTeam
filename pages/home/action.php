@@ -2,6 +2,23 @@
 		session_start();
 		if( isset($_GET["page"]) && isset($_GET["action"]))
 		{
+			?>
+			<script>
+				// initialize variables
+				var PAGE = "<?php echo $_GET["page"];?>";
+				var ACTION = "<?php echo $_GET["action"];?>";
+				var STUDENT_ID = "";
+				
+				<?php
+				if(isset($_GET["studentID"]))
+				{
+					?>
+					STUDENT_ID = "<?php echo $_GET["studentID"];?>";
+					<?php
+				}
+				?>
+			</script>
+			<?php
 		if($_GET["page"] == "searchStudent")
 		{
 			?>
@@ -336,6 +353,28 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
+											<label>Balance:</label>
+										</div>
+										<div id="balanceContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Balance due date:</label>
+										</div>
+										<div id="balanceDueDateContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
 											<label>Course Type:</label>
 										</div>
 										<div id="courseTypeContainer" class="col-md-3"></div>
@@ -355,8 +394,8 @@
 								<br/>
 								
 								<div class="btn-group" style="margin: 12px 385px">
-								  <button id="confirmButton" class="button">Confirm</button>
-								  <button id="cancelButton" class="button">Cancel</button>
+								  <button id="saveButton" class="button">Save</button>
+								  <button id="cancelButton" class="button" link="home.php">Cancel</button>
 								</div>
 								
 								
@@ -372,12 +411,15 @@
 												$("#emailContainer").html('<input type="email" name="studentEmail" placeholder="banuthegreat@gmail.com"/>');
 												$("#addressContainer").html('<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>');
 												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
+												$("#balanceContainer").html('$ <input type="number" name="balance"/>');
+												$("#balanceDueDateContainer").html('<input type="date" name="balanceDueDate"/>');
 												$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="1"/> Class 3 - Trucks </br>' +
 																				'<input type="radio" name="studentCourseType" value="2" checked/> Class 5 - Regular Vehicles');
 												$("#languageContainer").html('<select>'+
-																				'<option value="eng">English</option>' +
-																				'<option value="fre">French</option>'+
-																				'<option value="tam">Tamil</option>'+
+																				'<option value="default">Select language</option>' +
+																				'<option value="English">English</option>' +
+																				'<option value="French">French</option>'+
+																				'<option value="Tamil">Tamil</option>'+
 																			'</select>');
 											</script>
 										<?php
@@ -386,8 +428,7 @@
 										{
 											?>
 											<script>
-											var id = "<?php echo $_GET['studentID'];?>";
-												$.post("pages/home/getStudentInfo.php", {operation : "get", studentID : id}, function(data)
+												$.post("pages/home/studentInfo.php", {operation : "select", studentID : STUDENT_ID}, function(data)
 												{
 													var json = $.parseJSON(data);
 													
@@ -398,11 +439,13 @@
 													$("input[name=studentEmail]").val(json[0].email);
 													$("input[name=studentAddress]").val(json[0].address);
 													$("input[name=studentBD]").val(json[0].birthdate);
-													$("input[name=fname]").val(json[0].balance);
-													$("input[name=fname]").val(json[0].balanceDueDate);
+													$("input[name=balance]").val(json[0].balance);
+													$("input[name=balanceDueDate]").val(json[0].balanceDueDate);
 													$("input[name=studentCourseType]:checked").val(json[0].courseID);
 													$("select").val(json[0].language);
 												});
+												
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=edit");
 											</script>
 											<?php
 										}
@@ -413,17 +456,54 @@
 									{
 										?>
 											<script>
-												$("firstNameContainer").html('');
-												$("lastNameContainer").html('');
-												$("phoneContainer").html('');
-												$("emerPhoneContainer").html('');
-												$("emailContainer").html('');
-												$("addressContainer").html('');
-												$("bdayContainer").html('');
-												$("courseTypeContainer").html('');
-												$("languageContainer").html('');
+												$.post("pages/home/studentInfo.php", {operation : "select", studentID : STUDENT_ID}, function(data)
+												{
+													var json = $.parseJSON(data);
+													$("#firstNameContainer").html('<span>' + json[0].firstName + '</span>');
+													$("#lastNameContainer").html('<span>' + json[0].lastName + '</span>');
+													$("#phoneContainer").html('<span>' + json[0].phoneNumber + '</span>');
+													$("#emerPhoneContainer").html('<span>' + json[0].emergencyPhoneNumber + '</span>');
+													$("#emailContainer").html('<span>' + json[0].email + '</span>');
+													$("#addressContainer").html('<span>' + json[0].address + '</span>');
+													$("#bdayContainer").html('<span>' + json[0].birthdate + '</span>');
+													$("#balanceContainer").html('<span>' + json[0].balance + '</span>');
+													$("#balanceDueDateContainer").html('<span>' + json[0].balanceDueDate + '</span>');
+													
+													
+													if(parseInt(json[0].courseID) == 1 )
+														$("#courseTypeContainer").html('<span>Class 3 - Trucks</span>');
+													
+													else if(parseInt(json[0].courseID) == 2 )
+														$("#courseTypeContainer").html('<span>Class 5 - Regular Vehicles</span>');
+													
+													
+													$("#languageContainer").html('<span>' + json[0].language + '</span>');
+												});
 											</script>
 										<?php
+										
+										if($_GET["action"] == "delete")
+										{
+											?>
+											<script>
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=delete");
+												$("#saveButton").attr("id", "deleteButton");
+												$("#deleteButton").text("Delete");
+												$("#deleteButton").addClass("criticalButton");
+											</script>
+											<?php
+										}
+										
+										else
+										{
+											?>
+											<script>
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=display");
+												$("#cancelButton").text("Back");
+												$("#saveButton").remove();
+											</script>
+											<?php
+										}
 									}
 								?>
 								
