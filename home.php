@@ -60,7 +60,11 @@
 				
 				else if($_GET["page"] == "personal_file")
 				{
-					
+					?>
+                    	<script>
+							$(".container").load("pages/home/PersonalFile.html");
+						</script>
+                    <?php
 				}
 				
 				else if($_GET["page"] == "schedule")
@@ -86,14 +90,33 @@
 					
 				}
 				
-				else if($_GET["page"] == "addStudent")
+				else if($_GET["page"] == "studentInfoForm")
 				{
 					?>
 						<script>
 							var page = "<?php echo $_GET["page"] ?>";
-							$(".container").load("pages/home/action.php?page=" + page);
+							var action = "<?php echo $_GET["action"] ?>";
 						</script>
 					<?php
+					
+					if(!isset($_GET["studentID"]))
+					{
+						?>
+						<script>
+							$(".container").load("pages/home/action.php?page=" + page + "&action=" + action);
+						</script>
+						<?php
+					}
+					
+					else
+					{
+						?>
+						<script>
+							var id = "<?php echo $_GET["studentID"]?>";
+							$(".container").load("pages/home/action.php?page=" + page + "&action=" + action + "&studentID=" + id);
+						</script>
+						<?php
+					}
 				}
 				
 				else if($_GET["page"] == "searchStudent")

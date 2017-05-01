@@ -1,164 +1,25 @@
 		<?php
 		session_start();
-		if( isset($_GET["page"]) )
-		{
-		if($_GET["page"] == "addStudent")
+		if( isset($_GET["page"]) && isset($_GET["action"]))
 		{
 			?>
-			<style>
-				.button
+			<script>
+				// initialize variables
+				var PAGE = "<?php echo $_GET["page"];?>";
+				var ACTION = "<?php echo $_GET["action"];?>";
+				var STUDENT_ID = "";
+				
+				<?php
+				if(isset($_GET["studentID"]))
 				{
-					position: relative;
-					margin-right: 15px;
+					?>
+					STUDENT_ID = "<?php echo $_GET["studentID"];?>";
+					<?php
 				}
-			</style>
-		
-			<div class="col-md-12">
-						<section> 
-							<div class="sectionHeader">
-								<h2>Add student to database</h2>
-							</div>
-							
-							<!-- The form -->
-							
-							<br/>
-							
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>First Name:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="text" name="fname" placeholder="Banujan"/>
-										</div>
-								</div><!-- End row -->		
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Last Name:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="text" name="lname" placeholder="Atputhawhatever"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Phone Number:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="tel" name="studentPhone" placeholder="514-123-4567"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Emergency Contact:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="tel" name="studentEC" placeholder="450-987-6543"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Email Address:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="email" name="studentEmail" placeholder="banuthegreat@gmail.com"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Home Address:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Date of Birth:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="date" name="studentBD"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Course Type:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="radio" name="studentCourseType" value="trucks"/> Class 3 - Trucks </br>
-											<input type="radio" name="studentCourseType" value="regularVehicles" checked/> Class 5 - Regular Vehicles
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Language of Preference:</label>
-										</div>
-										<div class="col-md-3">
-											<select>
-											  <option value="eng">English</option>
-											  <option value="fre">French</option>
-											  <option value="tam">Tamil</option>
-											</select>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="btn-group" style="margin: 12px 385px">
-								  <button class="button">CONFIRM</button>
-								  <button class="button">CANCEL</button>
-								</div>
-								
-								</form>
-							</div>
-						</section>
+				?>
+			</script>
 			<?php
-
-		}
-
-		
-		else if($_GET["page"] == "searchStudent")
+		if($_GET["page"] == "searchStudent")
 		{
 			?>
 				<style>
@@ -200,77 +61,7 @@
 					}
 					
 				</style>
-				
-				<script>
-					// object of type student
-					function student(id, fname, lname, phone, emergencyPhone, bday, balance, balanceDueDate, courseID)
-					{
-						this.studentId = id;
-						this.firstName = fname;
-						this.lastName = lname;
-						this.phone = phone;
-						this.emergencyPhoneNumber = emergencyPhone;
-						this.birthdate = bday;
-						this.balance = balance;
-						this.balanceDueDate = balanceDueDate;
-						this.courseID = courseID;
-					}
-					
-					// array that will contain all students
-					var allStudents[];
-					
-					$(function()
-					{	
-						// event handler for search box
-						$("input[name=searchField]").keyup(function(e)
-						{
-							e.preventDefault();
-							
-							var toSearch = $(this).val();
-							
-							// create the RegExp
-							pattern = new RegExp(toSearch, "i");
-		
-							// create an array to store search results
-							var results = [];
-		
-							// check each elements of the catalog for pattern
-							for(var i = 0 ; i < allStudents.length ; i++)
-							{
-								// store each string to serach in a variable
-								var lname = allStudents[i].lastName;
-								var fname = allStudents[i].firstName;
-								var bday = allStudents[i].birthdate;
-								//var language = allStudents[i].language;
-			
-								// perform the search....
-								if( (categoryName.search(pattern) != -1) || (description.search(pattern) != -1) ||
-									(name.search(pattern) != -1) || (supplier.search(pattern) != -1) )
-								{
-									// if match is found, then store current index to results array
-									results[results.length] = catalog[i];
-								}
-							}
-		
-							// if at least one match has been found, then show result in a table using showListOfProducts(var) function
-							if(results.length > 0)
-							{
-								displaySearchResult(results);
-							}
-		
-							// if no results have been found
-							else
-							{
-								$("tbody").html("<p>Sorry. No matches for your search. :(></p>");
-							}
-						});
-					});
-					
-					function displaySearchResult(result)
-					{
-						
-					}
-				</script>
+				<script src="js/searchStudent.js"></script>
 				
 				<div class="row">
 					<div class="col-md-12">
@@ -319,17 +110,15 @@
 											<label>Search by:</label>
 										</div> <!-- End col -->
 										<div class="col-md-7">
-											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="lname" checked>Last Name
-											</label>
+									
 											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="fname">First Name
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="birthdate">Date of birth
+												<input type="radio" name="searchCriteria" value="lname" checked>Last Name
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="all">All
+												<input type="radio" name="searchCriteria" value="birthdate">Date of birth
 											</label>
 										</div> <!-- End col -->
 									</div> <!-- End row -->
@@ -429,6 +218,304 @@
 					</div> <!-- End col -->
 				</div> <!-- End row -->
 			<?php
+		}
+		
+		//if($_GET["page"] == "addStudent")
+		else if($_GET["page"] == "studentInfoForm")
+		{
+			?>
+			<style>
+				.button
+				{
+					position: relative;
+					margin-right: 15px;
+				}
+			</style>
+		
+			<div class="col-md-12">
+						<section> 
+							<div class="sectionHeader">
+								<?php
+									if($_GET["action"] == "add")
+									{
+										?>
+											<h2>Add student to database</h2>
+										<?php
+									}
+									
+									else if($_GET["action"] == "edit")
+									{
+										?>
+											<h2>Edit student</h2>
+										<?php
+									}
+									
+									else if($_GET["action"] == "delete")
+									{
+										?>
+											<h2>Delete student</h2>
+										<?php
+									}
+									
+									else if($_GET["action"] == "display")
+									{
+										?>
+											<h2>Display student</h2>
+										<?php
+									}
+								?>
+							</div>
+							
+							<!-- The form -->
+							
+							<br/>
+							
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>First Name:</label>
+										</div>
+										<div id="firstNameContainer" class="col-md-3"></div>
+								</div><!-- End row -->		
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Last Name:</label>
+										</div>
+										<div id="lastNameContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Phone Number:</label>
+										</div>
+										<div id="phoneContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Emergency Contact:</label>
+										</div>
+										<div id="emerPhoneContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Email Address:</label>
+										</div>
+										<div id="emailContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Home Address:</label>
+										</div>
+										<div id="addressContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Date of Birth:</label>
+										</div>
+										<div id="bdayContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Balance:</label>
+										</div>
+										<div id="balanceContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Balance due date:</label>
+										</div>
+										<div id="balanceDueDateContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Course Type:</label>
+										</div>
+										<div id="courseTypeContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Language of Preference:</label>
+										</div>
+										<div id="languageContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="btn-group" style="margin: 12px 385px">
+								  <button id="saveButton" class="button">Save</button>
+								  <button id="cancelButton" class="button" link="home.php">Cancel</button>
+								</div>
+								
+								
+								<?php
+									if($_GET["action"] == "add" || $_GET["action"] == "edit")
+									{
+										?>
+											<script>
+												$("#firstNameContainer").html('<input type="text" name="fname" placeholder="Enter student\'s first name"/>');
+												$("#lastNameContainer").html('<input type="text" name="lname" placeholder="Enter student\'s last name"/>');
+												$("#phoneContainer").html('<input type="tel" name="studentPhone" placeholder="514-123-4567"/>');
+												$("#emerPhoneContainer").html('<input type="tel" name="studentEC" placeholder="514-123-4567"/>');
+												$("#emailContainer").html('<input type="email" name="studentEmail" placeholder="example@example.com"/>');
+												$("#addressContainer").html('<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>');
+												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
+												$("#balanceContainer").html('$ <input type="number" name="balance"/>');
+												$("#balanceDueDateContainer").html('<input type="date" name="balanceDueDate"/>');
+												$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="2"/> Class 3 - Trucks </br>' +
+																				'<input type="radio" name="studentCourseType" value="1" checked/> Class 5 - Regular Vehicles');
+												$("#languageContainer").html('<select>'+
+																				'<option value="default">Select language</option>' +
+																				'<option value="English">English</option>' +
+																				'<option value="French">French</option>'+
+																				'<option value="Tamil">Tamil</option>'+
+																			'</select>');
+											</script>
+										<?php
+										
+										if($_GET["action"] == "edit")
+										{
+											?>
+											<script>
+												$.post("pages/home/studentInfo.php", {operation : "select", studentID : STUDENT_ID}, function(data)
+												{
+													var json = $.parseJSON(data);
+													
+													$("input[name=fname]").val(json[0].firstName);
+													$("input[name=lname]").val(json[0].lastName);
+													$("input[name=studentPhone]").val(json[0].phoneNumber);
+													$("input[name=studentEC]").val(json[0].emergencyPhoneNumber);
+													$("input[name=studentEmail]").val(json[0].email);
+													$("input[name=studentAddress]").val(json[0].address);
+													$("input[name=studentBD]").val(json[0].birthdate);
+													$("input[name=balance]").val(json[0].balance);
+													$("input[name=balanceDueDate]").val(json[0].balanceDueDate);
+													$("input[name=studentCourseType]:checked").val(json[0].courseID);
+													$("select").val(json[0].language);
+												});
+												
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=edit");
+											</script>
+											<?php
+										}
+										
+									}
+									
+									else if($_GET["action"] == "delete" || $_GET["action"] == "display")
+									{
+										?>
+											<script>
+												$.post("pages/home/studentInfo.php", {operation : "select", studentID : STUDENT_ID}, function(data)
+												{
+													var json = $.parseJSON(data);
+													$("#firstNameContainer").html('<span>' + json[0].firstName + '</span>');
+													$("#lastNameContainer").html('<span>' + json[0].lastName + '</span>');
+													$("#phoneContainer").html('<span>' + json[0].phoneNumber + '</span>');
+													$("#emerPhoneContainer").html('<span>' + json[0].emergencyPhoneNumber + '</span>');
+													$("#emailContainer").html('<span>' + json[0].email + '</span>');
+													$("#addressContainer").html('<span>' + json[0].address + '</span>');
+													$("#bdayContainer").html('<span>' + json[0].birthdate + '</span>');
+													$("#balanceContainer").html('<span>' + json[0].balance + '</span>');
+													$("#balanceDueDateContainer").html('<span>' + json[0].balanceDueDate + '</span>');
+													
+													
+													if(parseInt(json[0].courseID) == 1 )
+														$("#courseTypeContainer").html('<span>Class 3 - Trucks</span>');
+													
+													else if(parseInt(json[0].courseID) == 2 )
+														$("#courseTypeContainer").html('<span>Class 5 - Regular Vehicles</span>');
+													
+													
+													$("#languageContainer").html('<span>' + json[0].language + '</span>');
+												});
+											</script>
+										<?php
+										
+										if($_GET["action"] == "delete")
+										{
+											?>
+											<script>
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=delete");
+												$("#saveButton").attr("id", "deleteButton");
+												$("#deleteButton").text("Delete");
+												$("#deleteButton").addClass("criticalButton");
+											</script>
+											<?php
+										}
+										
+										else
+										{
+											?>
+											<script>
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=display");
+												$("#cancelButton").text("Back");
+												$("#printButton").attr("id", "printButton");
+												$("#saveButton").text("Print");
+											</script>
+											<?php
+										}
+									}
+								?>
+								
+								
+								<script>
+									$(".button").click(buttonClicked);
+								</script>
+								
+								</form>
+							</div>
+						</section>
+			<?php
+
 		}
 	}
 ?>

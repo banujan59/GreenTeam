@@ -210,7 +210,10 @@ session_start();
             <div class="row">
             <div class="col-md-12">
             
-            <section style="margin-top:5%" class="scheduleViewer">
+            <section style="margin-top:5%;" class="scheduleViewer">
+			<?php
+			if($_SESSION["user_type"] == "student"){ 
+			?>
             	<div class="sectionHeader">
 					<h2>What's on your schedule?</h2>
                 </div>
@@ -242,6 +245,58 @@ session_start();
             	        
                     </div>
                 </div>
+				<?php
+			} else if($_SESSION["user_type"] == "admin")
+			{ 
+		    $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+			// Check connection
+			if ($conn->connect_error) {
+				die("Connection failed: " . $conn->connect_error);
+			} 
+			$studentid = $_SESSION["user_studentid"];
+			$sql = "SELECT studentId, firstName, lastName, balance, phoneNumber, balanceDueDate FROM students where balanceDueDate < CURDATE() and balance > 0 order by DATE_FORMAT(balanceDueDate, '%Y/%m/%d')";
+		    $result = $conn->query($sql);
+			$studentsids = array();
+			$students = array();
+			$num = $result->num_rows;
+			if(0==$num) {
+				echo "No record";
+				} else {
+			 while($row = $result->fetch_assoc()) {
+				$studentsids[] = $row["studentId"];
+				$date1=date_create($row["balanceDueDate"]);
+                $myDate = new DateTime();
+				$diff=date_diff($date1,$myDate);
+				$students[] = "Name: " . $row["firstName"] . " " . $row["lastName"] . " <br>Due Amount: $" . $row["balance"] . "<br>Due: " . $diff->days . " days ago<br>Due Date: " . $row["balanceDueDate"] . "<br>Phone Number: " . $row["phoneNumber"];
+				}}
+			
+			$conn->close();
+		
+			?>
+				<div class="sectionHeader">
+					<h2>Due balances</h2>
+                </div>
+                <div class="blockContainer" >
+                	<div id="blockInnerContainerList" class="blockInnerContainer">
+    	            	<!-- Show the 7 latest events only -->
+						<script>
+						var script1 = "";
+						
+						var studentIds= <?php echo json_encode($studentsids ); ?>;
+						var days= <?php echo json_encode($students ); ?>;
+						for(i = 0; i < days.length; i++){
+						
+	                	 script1 +="<div class='block'><div class='blockHeader'><h3>Student ID "+studentIds[i]+"</h3></div><div class='blockContent'><p><b>"+days[i]+"</b><br/><br/></p></div></div>";
+						}
+						document.getElementById("blockInnerContainerList").innerHTML = script1;
+                    </script>
+            	        
+                    </div>
+                </div>
+				
+				<?php
+			} 
+			?>
             </section>
             
             </div>
