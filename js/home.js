@@ -139,7 +139,7 @@ function buttonClicked()
 			language : language
 		};
 		
-		if ( studentInfo.firstName.length < 2 || studentInfo.lastName.length < 2 || studentInfo.email.length < 4 || studentInfo.address.length < 4 || studentInfo.birthdate.length < 4 || studentInfo.balance.length < 1 || studentInfo.balanceDueDate.length < 4) {
+		if ( studentInfo.language.length < 2 || studentInfo.firstName.length < 2 || studentInfo.lastName.length < 2 || studentInfo.email.length < 4 || studentInfo.address.length < 4 || studentInfo.birthdate.length < 4 || studentInfo.balance.length < 1 || studentInfo.balanceDueDate.length < 4) {
 			window.alert("Please fill in all the information.");
 		}else if (studentInfo.emergencyPhoneNumber.length != 10 || studentInfo.phoneNumber.length != 10){
 		window.alert("Phone numbers need to be 10 digits long.");
