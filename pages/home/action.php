@@ -411,6 +411,7 @@
 												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
 												$("#balanceContainer").html('$ <input type="number" name="balance"/>');
 												$("#balanceDueDateContainer").html('<input type="date" name="balanceDueDate"/>');
+												
 												$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="2"/> Class 3 - Trucks </br>' +
 																				'<input type="radio" name="studentCourseType" value="1" checked/> Class 5 - Regular Vehicles');
 												$("#languageContainer").html('<select>'+
