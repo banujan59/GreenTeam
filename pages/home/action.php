@@ -498,7 +498,8 @@
 											<script>
 												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=display");
 												$("#cancelButton").text("Back");
-												$("#saveButton").remove();
+												$("#printButton").attr("id", "printButton");
+												$("#saveButton").text("Print");
 											</script>
 											<?php
 										}

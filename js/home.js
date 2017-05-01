@@ -198,6 +198,18 @@ function buttonClicked()
 		}
 	}
 	
+	else if(id == "printButton")
+	{
+		fadeOUTContainer();
+		setTimeout(function()
+		{
+			$(".container").load("pages/home/print.php?studentID=" + STUDENT_ID, function()
+			{
+				fadeINContainer();
+			});
+		}, 750);
+	}
+	
 	// for the cancel button on the student info form
 	else if(id == "cancelButton")
 	{

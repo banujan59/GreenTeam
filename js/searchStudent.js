@@ -62,10 +62,6 @@
 										currentProperty = allStudents[i].birthdate;
 									}
 
-									else if(criteria == "all")
-									{
-									}
-
 									// perform the search....
 									if( currentProperty.search(pattern) != -1 )
 									{
@@ -129,7 +125,7 @@
 							td.appendTo(tr);
 
 							td = $("<td/>");
-							td.text(result[i].phoneNumber);
+							td.text(result[i].phone);
 							td.appendTo(tr);
 
 							td = $("<td/>");
