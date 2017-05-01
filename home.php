@@ -60,7 +60,11 @@
 				
 				else if($_GET["page"] == "personal_file")
 				{
-					
+					?>
+                    	<script>
+							$(".container").load("pages/home/PersonalFile.html");
+						</script>
+                    <?php
 				}
 				
 				else if($_GET["page"] == "schedule")
