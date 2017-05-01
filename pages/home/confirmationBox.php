@@ -4,7 +4,7 @@
 	
 	<br/><br/>
 	
-	<div id="okButton" style="left:50%; margin-left:-75px;" class="button">Ok</div>
+	<div id="okButton" style="left:50%; top:-25%; margin-left:-75px;" class="button">OK</div>
 	
 	<script>
 		// set event handlers
