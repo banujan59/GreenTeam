@@ -406,7 +406,7 @@
 												$("#lastNameContainer").html('<input type="text" name="lname" placeholder="Enter student\'s last name"/>');
 												$("#phoneContainer").html('<input type="tel" name="studentPhone" placeholder="514-123-4567"/>');
 												$("#emerPhoneContainer").html('<input type="tel" name="studentEC" placeholder="514-123-4567"/>');
-												$("#emailContainer").html('<input type="email" name="studentEmail" placeholder="banuthegreat@gmail.com"/>');
+												$("#emailContainer").html('<input type="email" name="studentEmail" placeholder="example@example.com"/>');
 												$("#addressContainer").html('<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>');
 												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
 												$("#balanceContainer").html('$ <input type="number" name="balance"/>');
