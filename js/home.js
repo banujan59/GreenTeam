@@ -204,16 +204,25 @@ function buttonClicked()
 		}
 	}
 	
-	else if(id == "printButton")
+	else if(id == "printStudentButton" || id == "printAllStudentButton")
 	{
 		fadeOUTContainer();
-		setTimeout(function()
+		
+		if(id == "printStudentButton")
 		{
-			$(".container").load("pages/home/print.php?studentID=" + STUDENT_ID, function()
+			setTimeout(function()
 			{
-				fadeINContainer();
-			});
-		}, 750);
+				location = "pages/home/print.php?printALLStudent=false&studentID=" + STUDENT_ID;
+			}, 750);
+		}
+		
+		else
+		{
+			setTimeout(function()
+			{
+				location = "pages/home/print.php?printALLStudent=true"
+			}, 750);
+		}
 	}
 	
 	// for the cancel button on the student info form
