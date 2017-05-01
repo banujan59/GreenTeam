@@ -120,9 +120,6 @@
 											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="birthdate">Date of birth
 											</label>
-											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="all">All
-											</label>
 										</div> <!-- End col -->
 									</div> <!-- End row -->
 										<br/><br/>
@@ -414,7 +411,7 @@
 												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
 												$("#balanceContainer").html('$ <input type="number" name="balance"/>');
 												$("#balanceDueDateContainer").html('<input type="date" name="balanceDueDate"/>');
-												$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="3"/> Class 3 - Trucks </br>' +
+												$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="2"/> Class 3 - Trucks </br>' +
 																				'<input type="radio" name="studentCourseType" value="1" checked/> Class 5 - Regular Vehicles');
 												$("#languageContainer").html('<select>'+
 																				'<option value="default">Select language</option>' +
