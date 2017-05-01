@@ -139,6 +139,11 @@ function buttonClicked()
 			language : language
 		};
 		
+		if ( studentInfo.firstName.length < 4 || studentInfo.lastName.length < 4 || studentInfo.phoneNumber.length < 10 || studentInfo.emergencyPhoneNumber.length < 10 || studentInfo.email.length < 4 || studentInfo.address.length < 4 || studentInfo.birthdate.length < 4 || studentInfo.balance.length < 2 || studentInfo.balanceDueDate.length < 4) {
+			window.alert("Please fill in all the information.");
+			
+		} else {
+		
 		if(ACTION == "add")
 		{
 			studentInfo.operation = "insert";
@@ -176,6 +181,7 @@ function buttonClicked()
 				}
 			});
 		}
+	}
 	}
 	
 	else if(id == "deleteButton")
