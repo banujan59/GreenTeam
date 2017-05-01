@@ -190,7 +190,6 @@ function buttonClicked()
 		{
 			$.post("pages/home/studentInfo.php", {operation : "delete", studentID : STUDENT_ID}, function(data)
 			{
-				window.alert(data);
 				if(data == "success")
 				{
 					showNoticeBox("The selected record was successfully deleted!");
