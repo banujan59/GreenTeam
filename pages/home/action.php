@@ -418,7 +418,7 @@
 													$("#emailContainer").html('<span>' + json[0].email + '</span>');
 													$("#addressContainer").html('<span>' + json[0].address + '</span>');
 													$("#bdayContainer").html('<span>' + json[0].birthdate + '</span>');
-													$("#balanceContainer").html('<span>' + json[0].balance + '</span>');
+													$("#balanceContainer").html('<span>$ ' + json[0].balance + '</span>');
 													$("#balanceDueDateContainer").html('<span>' + json[0].balanceDueDate + '</span>');
 													
 													
