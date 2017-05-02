@@ -88,6 +88,7 @@ session_start();
 				}
 				
 				tbody.html(html);
+				window.print();
 			}); // end post
 			});
 			</script>
@@ -172,6 +173,7 @@ session_start();
 					html += "</tr>";
 					
 					tbody.html(html);
+					window.print();
 				});
 			});
 			</script>
@@ -179,9 +181,5 @@ session_start();
 		}
 	}
 ?>
-
-<script>
-				//window.print();
-			</script>
 	</body>
 </html>
