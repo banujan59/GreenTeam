@@ -1,3 +1,4 @@
+var toastISOpen = false;
 $(function()
 {	
 	/* Event handler for the buttons */
@@ -92,16 +93,47 @@ function buttonClicked()
 		var email = $("input[name=emailField]").val();
 		var pwd = $("input[name=pwdField]").val();
 		
-		$.post("pages/login/userLogin.php", {"email" : email, "pwd" : pwd}, function(data)
+		var patt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if(patt.test(email))
+		{
+			$.post("pages/login/userLogin.php", {"email" : email, "pwd" : pwd}, function(data)
 			{
 				if(data == "success")
 				{
-					$(document.body).fadeOut(500, function()
+					$(".button").css("transition", "none");
+					$("input[name=emailField], input[name=pwdField], .button").fadeOut(500, function()
 					{
-						location = "home.php";
+						carDrive();
+					
+						setTimeout(function()
+						{
+							$(document.body).fadeOut(500, function()
+							{
+								location = "home.php";
+							});
+						}, 2000);
 					});
 				}
+				
+				else if(data =="wrong user password combo")
+				{
+					Toast("The email or password you entered is incorrect.");
+					shakeCar();
+				}
+				
+				else
+				{
+					Toast("The server could not be accessed. Please try again");
+					shakeCar();
+				}
 			});
+		}
+		
+		else
+		{
+			Toast("The email you entered is invalid.");
+			shakeCar();
+		}
 	}
 	
 	else if( buttonClicked.attr("id") == "sendEmailKeyButton" )
@@ -247,17 +279,54 @@ function requestLanguageChange(language)
 
 function Toast(message)
 {
-	var div = $("<div></div>");
-	div.attr("class", "toast");
+	if(toastISOpen == false)
+	{
+		toastISOpen = true;
+		var div = $("<div></div>");
+		div.attr("class", "toast");
 	
-	div.text(message);
-	div.insertAfter( $("#container") );
+		div.text(message);
+		div.insertAfter( $("#container") );
 	
-	div.css("animation", "toastAnimation 4s");
+		div.css("animation", "toastAnimation 4s");
+		setTimeout(function()
+		{
+			div.remove();
+			toastISOpen = false;
+		}, 2750);
+	}
+}
+
+function shakeCar()
+{
+	$(".loginForm").css("transition", ".1");
+	$(".loginForm").css("transform", "rotate(5deg)");
 	setTimeout(function()
 	{
-		div.remove();
-	}, 4500);
+		$(".loginForm").css("transform", "rotate(-5deg)");
+		setTimeout(function()
+		{
+			$(".loginForm").css("transform", "rotate(5deg)");
+			setTimeout(function()
+			{
+				$(".loginForm").css("transform", "rotate(-5deg)");
+				setTimeout(function()
+				{
+					$(".loginForm").css("transform", "rotate(0deg)");
+					$(".loginForm").css("transition", ".5");
+				}, 100);
+			}, 100);
+		}, 100);
+	}, 100);
+}
+
+function carDrive()
+{
+	$(".loginForm").css(
+	{
+		"transition" : "2s",
+		"transform" : "translateX(-1500px)"
+	});
 }
 
 function insertModalDiv()
