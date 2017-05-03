@@ -268,7 +268,7 @@ session_start();
 				$date1=date_create($row["balanceDueDate"]);
                 $myDate = new DateTime();
 				$diff=date_diff($date1,$myDate);
-				$students[] = "Name: " . $row["firstName"] . " " . $row["lastName"] . " <br>Due Amount: $" . $row["balance"] . "<br>Due: " . $diff->days . " days ago<br>Due Date: " . $row["balanceDueDate"] . "<br>Phone Number: " . $row["phoneNumber"];
+				$students[] = "<br>Name: " . $row["firstName"] . " " . $row["lastName"] . " <br>Due Amount: $" . $row["balance"] . "<br>Due: " . $diff->days . " days ago<br>Due Date: " . $row["balanceDueDate"] . "<br>Phone Number: " . $row["phoneNumber"];
 				}}
 			
 			$conn->close();
@@ -277,9 +277,9 @@ session_start();
 				<div class="sectionHeader">
 					<h2>Due balances</h2>
                 </div>
-                <div class="blockContainer" >
+                <div class="blockContainer" width="5000px">
                 	<div id="blockInnerContainerList" class="blockInnerContainer">
-    	            	<!-- Show the 7 latest events only -->
+    	            	<!-- Administrator's block -->
 						<script>
 						var script1 = "";
 						

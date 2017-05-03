@@ -30,7 +30,14 @@
 	    <nav>
     	    <ul>
 				<li><a href="home.php">Home</a></li>
-				<li><a href="home.php?page=personal_file">Personal File</a></li>
+				<?php
+					if( $_SESSION["user_type"] == "student")
+					{
+						?>
+							<li><a href="home.php?page=personal_file">Personal File</a></li>
+						<?php
+					}
+				?>
 			    <li><a href="home.php?page=schedule">Schedule</a></li>
 			    <li><a href="home.php?page=appointments">Appointments</a></li>
 			    <?php
