@@ -81,8 +81,6 @@ session_start();
 								<option>Choose action</option>
 								<option>Add a new event</option>
 								<option>Edit an existant event</option>
-								<option>Update schedule</option>
-								<option>Add new lesson</option>
 							</select>
 						</div> <!-- End col -->
 						<div class="col-md-5">
@@ -120,6 +118,8 @@ session_start();
 						<div class="col-md-5">
 							<select id="scheduleDropdown">
 								<option>Choose action</option>
+								<option>Update schedule</option>
+								<option>Add new lesson</option>
 							</select>
 						</div> <!-- End col -->	
 						<div class="col-md-5">
