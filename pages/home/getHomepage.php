@@ -103,6 +103,7 @@ session_start();
 							<option>Edit student</option>
 							<option>Delete student</option>
 							<option>Display student</option>
+							<option>Print Summary</option>
 						</select>
 						</div> <!-- End col -->
 						<div class="col-md-5">

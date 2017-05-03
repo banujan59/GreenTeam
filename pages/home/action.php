@@ -64,7 +64,6 @@
 					{
 						height: 40px;
 					}
-					
 				</style>
 				<script src="js/searchStudent.js"></script>
 				
@@ -126,8 +125,6 @@
 												<input type="radio" name="searchCriteria" value="birthdate">Date of birth
 											</label>
 										</div> <!-- End col -->
-										<div class="col-md-2"><div style="" id="printAllStudentButton" class="button">Print all</div></div> <!-- End col -->
-										<script>$(function(){$(".button").click(buttonClicked);});</script>
 									</div> <!-- End row -->
 										<br/><br/>
 									<div class="row" style="height:37.37166324435318%;">
