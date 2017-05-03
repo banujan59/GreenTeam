@@ -60,6 +60,10 @@
 						background-color: rgba(239, 48, 56, 0.5) !important;
 					}
 					
+					#printAllStudentButton
+					{
+						height: 40px;
+					}
 				</style>
 				<script src="js/searchStudent.js"></script>
 				
@@ -109,7 +113,7 @@
 										<div class="col-md-2">
 											<label>Search by:</label>
 										</div> <!-- End col -->
-										<div class="col-md-7">
+										<div class="col-md-5">
 									
 											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="fname">First Name
@@ -140,7 +144,6 @@
 											<table class="table table-striped">
 												<thead>
 													<tr>
-														<th>Student ID</th>
 														<th>First name</th>
 														<th>Last name</th>
 														<th>Phone number</th>
@@ -149,63 +152,10 @@
 														<th>Balance</th>
 														<th>Balance due date</th>
 														<th>Course ID</th>
+														<th>Language</th>
 													</tr>
 												</thead>
 												<tbody>
-													<?php
-														$servername = "localhost";
-														$dbusername = "root";
-														$dbpassword = "";
-														$dbname = "universaldb";
-													
-														// Create connection
-														$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-														// Check connection
-														if ($conn->connect_error) {
-															die("Connection failed: " . $conn->connect_error);
-														} 
-	
-														$sql = "SELECT studentId, firstName, lastName, phoneNumber, emergencyPhoneNumber, birthdate, balance, balanceDueDate, courseID  FROM STUDENTS";
-														$result = $conn->query($sql);
-	
-														if ($result->num_rows > 0) {
-														// output data of each row
-															while($row = $result->fetch_assoc())
-															{
-																?>
-																	<tr id="<?php echo $row["studentId"];?>">
-																		<td><?php echo $row["studentId"]; ?></td>
-																		<td><?php echo $row["firstName"]; ?></td>
-																		<td><?php echo $row["lastName"]; ?></td>
-																		<td><?php echo $row["phoneNumber"]; ?></td>
-																		<td><?php echo $row["emergencyPhoneNumber"]; ?></td>
-																		<td><?php echo $row["birthdate"]; ?></td>
-																		<td><?php echo $row["balance"]; ?></td>
-																		<td><?php echo $row["balanceDueDate"]; ?></td>
-																		<td><?php echo $row["courseID"]; ?></td>
-																	</tr>
-																	
-																	<script>
-																		allStudents[allStudents.length] = new student(
-																			"<?php echo $row["studentId"]; ?>",
-																			"<?php echo $row["firstName"]; ?>", 
-																			"<?php echo $row["lastName"]; ?>", 
-																			"<?php echo $row["phoneNumber"]; ?>", 
-																			"<?php echo $row["emergencyPhoneNumber"]; ?>", 
-																			"<?php echo $row["birthdate"]; ?>", 
-																			"<?php echo $row["balance"]; ?>",
-																			"<?php echo $row["balanceDueDate"]; ?>",
-																			"<?php echo $row["courseID"]; ?>"
-																		);
-																	</script>
-																<?php
-															}
-	
-														} else {
-															echo "wrong user password combo";
-														}
-														$conn->close();
-													?>
 												</tbody>
 											</table>
 										</div> <!-- End col -->
@@ -411,7 +361,7 @@
 												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
 												$("#balanceContainer").html('$ <input type="number" name="balance"/>');
 												$("#balanceDueDateContainer").html('<input type="date" name="balanceDueDate"/>');
-												
+			
 												$.post("pages/home/courseDB.php", {operation : "selectALL"}, function(data)
 												{
 													window.alert(data);
@@ -426,6 +376,7 @@
 													}
 													
 													$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="2"/> Class 3 - Trucks </br>' +
+
 																				'<input type="radio" name="studentCourseType" value="1" checked/> Class 5 - Regular Vehicles');
 												});
 												
@@ -479,7 +430,7 @@
 													$("#emailContainer").html('<span>' + json[0].email + '</span>');
 													$("#addressContainer").html('<span>' + json[0].address + '</span>');
 													$("#bdayContainer").html('<span>' + json[0].birthdate + '</span>');
-													$("#balanceContainer").html('<span>' + json[0].balance + '</span>');
+													$("#balanceContainer").html('<span>$ ' + json[0].balance + '</span>');
 													$("#balanceDueDateContainer").html('<span>' + json[0].balanceDueDate + '</span>');
 													
 													
@@ -513,8 +464,8 @@
 											<script>
 												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=display");
 												$("#cancelButton").text("Back");
-												$("#printButton").attr("id", "printButton");
-												$("#saveButton").text("Print");
+												$("#saveButton").attr("id", "printStudentButton");
+												$("#printStudentButton").text("Print");
 											</script>
 											<?php
 										}

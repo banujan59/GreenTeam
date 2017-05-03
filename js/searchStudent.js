@@ -1,5 +1,5 @@
 // object of type student
-					function student(id, fname, lname, phone, emergencyPhone, bday, balance, balanceDueDate, courseID)
+					function student(id, fname, lname, phone, emergencyPhone, bday, balance, balanceDueDate, courseID, language)
 					{
 						this.studentId = id;
 						this.firstName = fname;
@@ -10,6 +10,7 @@
 						this.balance = balance;
 						this.balanceDueDate = balanceDueDate;
 						this.courseID = courseID;
+						this.language = language
 					}
 
 							// array that will contain all students
@@ -17,7 +18,42 @@
 
 					$(function()
 					{	
-						tableRowEvent();
+						$.post("pages/home/studentInfo.php", {operation : "selectALL"}, function(data)
+						{
+							var json = $.parseJSON(data);
+							var tbody = $("tbody");
+							var html = "";
+							for(var i = 0 ; i < json.length ; i++)
+							{
+								html += "<tr id=" + json[i].studentId + ">";
+								html += "<td>" + json[i].firstName +"</td>";
+								html += "<td>" + json[i].lastName +"</td>";
+								html += "<td>" + json[i].phoneNumber +"</td>";
+								html += "<td>" + json[i].emergencyPhoneNumber +"</td>";
+								html += "<td>" + json[i].birthdate +"</td>";
+								html += "<td>" + json[i].balance +"</td>";
+								html += "<td>" + json[i].balanceDueDate +"</td>";
+								html += "<td>" + json[i].courseID +"</td>";
+								html += "<td>" + json[i].language +"</td>";
+								html += "</tr>";
+								
+								allStudents[allStudents.length] = new student(
+									json[i].studentId,
+									json[i].firstName,
+									json[i].lastName,
+									json[i].phoneNumber,
+									json[i].emergencyPhoneNumber,
+									json[i].birthdate,
+									json[i].balance,
+									json[i].balanceDueDate,
+									json[i].courseID,
+									json[i].language
+								);
+								
+							}
+							tbody.html(html);
+							tableRowEvent();
+						});
 						
 						// event handler for search box
 						$("input[name=searchField]").keyup(function(e)

@@ -78,33 +78,43 @@ function fadeOUTContainer()
 function buttonClicked()
 {
 	var id = $(this).attr("id");
-	
 	if(id == "performStudentButton")
 	{
-		fadeOUTContainer();
-		setTimeout(function()
+		var selectedAction = $("#studentDropdown").val();
+		
+		if(selectedAction == "Print Summary")
 		{
-			var selectedAction = $("#studentDropdown").val();
-			if(selectedAction == "Add new student")
-			{
-				location = "home.php?page=studentInfoForm&action=add";
-			}
+			window.open("pages/home/print.php?printALLStudent=true");
+		}
 		
-			else if(selectedAction == "Edit student")
+		else
+		{
+			fadeOUTContainer();
+			setTimeout(function()
 			{
-				location = "home.php?page=searchStudent&action=edit";
-			}
+				var selectedAction = $("#studentDropdown").val();
+				if(selectedAction == "Add new student")
+				{
+					location = "home.php?page=studentInfoForm&action=add";
+				}
 		
-			else if(selectedAction == "Delete student")
-			{
-				location = "home.php?page=searchStudent&action=delete";
-			}
+				else if(selectedAction == "Edit student")
+				{
+					location = "home.php?page=searchStudent&action=edit";
+				}
 		
-			else if(selectedAction == "Display student")
-			{
-				location = "home.php?page=searchStudent&action=display";
-			}
-		}, 750);
+				else if(selectedAction == "Delete student")
+				{
+					location = "home.php?page=searchStudent&action=delete";
+				}
+		
+				else if(selectedAction == "Display student")
+				{
+					location = "home.php?page=searchStudent&action=display";
+				}
+			}, 750);
+		}
+		
 		
 	}
 	
@@ -203,16 +213,9 @@ function buttonClicked()
 		}
 	}
 	
-	else if(id == "printButton")
+	else if(id == "printStudentButton")
 	{
-		fadeOUTContainer();
-		setTimeout(function()
-		{
-			$(".container").load("pages/home/print.php?studentID=" + STUDENT_ID, function()
-			{
-				fadeINContainer();
-			});
-		}, 750);
+		window.open("pages/home/print.php?printALLStudent=false&studentID=" + STUDENT_ID);
 	}
 	
 	// for the cancel button on the student info form

@@ -45,6 +45,38 @@
 		}
 		}
 		
+		else if($_POST["operation"] == "selectALL")
+		{
+			$sql = "SELECT * FROM STUDENTS";
+			$result = $conn->query($sql);
+		
+			if($result->num_rows > 0)
+			{
+				$json = array();
+				while($row = $result->fetch_assoc())
+				{
+					$students = array(
+						'studentId' => $row['studentId'],
+						'firstName' => $row['firstName'],
+						'lastName' => $row['lastName'],
+						'phoneNumber' => $row['phoneNumber'],
+						'emergencyPhoneNumber' => $row['emergencyPhoneNumber'],
+						'email' => $row['email'],
+						'address' => $row['address'],
+						'birthdate' => $row['birthdate'],
+						'balance' => $row['balance'],
+						'balanceDueDate' => $row['balanceDueDate'],
+						'courseID' => $row['courseID'],
+						'language' => $row['language']
+					);
+					array_push($json, $students);
+				}
+			
+				$jsonstring = json_encode($json);
+				echo $jsonstring;
+			}
+		}
+		
 		else if($_POST["operation"] == "insert")
 		{
 			$sql = "SELECT MAX(studentId) + 1 FROM students";
