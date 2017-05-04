@@ -1,5 +1,6 @@
 <?php
-	if( isset($_POST["operation"]) )
+session_start();
+	if( isset($_SESSION["user_type"]) && $_SESSION["user_type"] == "admin" && isset($_POST["operation"]) )
 	{
 		$servername = "localhost";
 		$dbusername = "root";
