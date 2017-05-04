@@ -77,9 +77,22 @@
 				else if($_GET["page"] == "schedule")
 				{
 					?>
-                    	<p>
-                        	You loaded the schedule.
-                        </p>
+                    	<?php
+					if( $_SESSION["user_type"] == "student")
+					{
+						?>
+							<img src="images/Schedule.png" alt="StudentSchedule">
+						<?php
+					}
+				?>
+				<?php
+					if( $_SESSION["user_type"] == "admin")
+					{
+						?>
+							<img src="images/Schedule - Admin.png" alt="AdminSchedule">
+						<?php
+					}
+				?>
                     <?php
 				}
 				
