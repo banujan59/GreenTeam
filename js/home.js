@@ -46,9 +46,7 @@ function Toast(message)
 	
 	div.text(message);
 	div.css("opacity", "0");
-	div.css("top", "85%");
 	div.insertAfter( $("nav") );
-	
 	
 	div.fadeTo(500, 1, function()
 	{

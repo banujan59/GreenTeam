@@ -313,10 +313,10 @@ select
 {
 	position: absolute;
 	left: 50%;
-	top: 150%;
+	top: 85%;
 	
 	width: 50%;
-	height: 70px;
+	height: 120px;
 	
 	margin-left: -25%;
 	padding-top: 50px;
@@ -330,32 +330,5 @@ select
 	font-size: 20px;
 	
 	z-index: 999;
-}
-
-@keyframes toastAnimation
-{
-	0%
-	{
-		top: 150%;
-		opacity: 0;
-	}
-	
-	20%
-	{
-		top: 80%;
-		opacity: 1;
-	}
-	
-	60%
-	{
-		top: 80%;
-		opacity: 1;
-	}
-	
-	100%
-	{
-		top: 150%;
-		opacity: 0;
-	}
 }
 /* Toast */
