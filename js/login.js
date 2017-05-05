@@ -111,7 +111,7 @@ function buttonClicked()
 							{
 								location = "home.php";
 							});
-						}, 2000);
+						}, 750);
 					});
 				}
 				

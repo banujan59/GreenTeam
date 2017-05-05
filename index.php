@@ -9,12 +9,12 @@
     	<title>Universal Driving School</title>
         <meta charset="utf-8"/>
         
-        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/login.css"/>
         <link rel="stylesheet" href="css/keyframes.css"/>
     </head>
     
     <script src="Libraries/jQuery.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/login.js"></script>
     
     <body>
 	<div id="container">
