@@ -306,7 +306,9 @@ select
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(255,0,0,0.4); 
 }
+
 /* Scrollbar style */
+
 
 /* Toast */
 .toast
@@ -332,3 +334,4 @@ select
 	z-index: 999;
 }
 /* Toast */
+
