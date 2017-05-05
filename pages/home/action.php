@@ -180,6 +180,18 @@
 					position: relative;
 					margin-right: 15px;
 				}
+				
+				.errorMessages
+				{
+					color: red;
+					opacity: 0;
+					transition: .5s;
+				}
+				
+				label
+				{
+					transition: .5s;
+				}
 			</style>
 		
 			<div class="col-md-12">
@@ -224,9 +236,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>First Name:</label>
+											<label id="firstNameLabel">First Name:</label>
 										</div>
 										<div id="firstNameContainer" class="col-md-3"></div>
+										<div id="firstNameError" class="col-md-3 errorMessages">Please enter a valid first name</div>
 								</div><!-- End row -->		
 								
 								<br/>
@@ -235,9 +248,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Last Name:</label>
+											<label id="lastNameLabel">Last Name:</label>
 										</div>
 										<div id="lastNameContainer" class="col-md-3"></div>
+										<div id="lastNameError" class="col-md-3 errorMessages">Please enter a valid last name</div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -246,9 +260,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Phone Number:</label>
+											<label id="phoneLabel">Phone Number:</label>
 										</div>
 										<div id="phoneContainer" class="col-md-3"></div>
+										<div id="phoneError" class="col-md-3 errorMessages">Please enter a valid phone number</div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -257,9 +272,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Emergency Contact:</label>
+											<label id="emergencyPhoneLabel">Emergency Contact:</label>
 										</div>
 										<div id="emerPhoneContainer" class="col-md-3"></div>
+										<div id="emergencyPhoneError" class="col-md-3 errorMessages">Please enter a valid emergency phone number</div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -268,9 +284,11 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Email Address:</label>
+											<label id="emailLabel">Email Address:</label>
 										</div>
 										<div id="emailContainer" class="col-md-3"></div>
+										<div id="emailError" class="col-md-3 errorMessages">Please enter a valid email</div>
+
 								</div><!-- End row -->
 								
 								<br/>
@@ -279,9 +297,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Home Address:</label>
+											<label id="addressLabel">Home Address:</label>
 										</div>
 										<div id="addressContainer" class="col-md-3"></div>
+										<div id="addressError" class="col-md-3 errorMessages">Please enter a valid address</div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -290,9 +309,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Date of Birth:</label>
+											<label id="bdayLabel">Date of Birth:</label>
 										</div>
 										<div id="bdayContainer" class="col-md-3"></div>
+										<div id="bdayError" class="col-md-3 errorMessages">Please enter a valid birth date</div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -301,9 +321,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Balance:</label>
+											<label id="balanceLabel">Balance:</label>
 										</div>
 										<div id="balanceContainer" class="col-md-3"></div>
+										<div id="balanceError" class="col-md-3 errorMessages">Please enter a valid balance</div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -312,9 +333,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Balance due date:</label>
+											<label id="balanceDueDateLabel">Balance due date:</label>
 										</div>
 										<div id="balanceDueDateContainer" class="col-md-3"></div>
+										<div id="balanceDueDateError" class="col-md-3 errorMessages">Please enter a due date</div>
 								</div><!-- End row -->
 								
 								<br/>
@@ -334,9 +356,10 @@
 									<div class="col-md-4"></div>
 									
 										<div class="col-md-2">
-											<label>Language of Preference:</label>
+											<label id="languagelabel">Language of Preference:</label>
 										</div>
 										<div id="languageContainer" class="col-md-3"></div>
+										<div id="languageError" class="col-md-3 errorMessages">Please select a valid language</div>
 								</div><!-- End row -->
 								
 								<br/>
