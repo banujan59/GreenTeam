@@ -119,6 +119,9 @@ function buttonClicked()
 	// for the save button on the student info form
 	else if(id == "saveButton")
 	{
+		$(".errorMessages").css("opacity", "0");
+		$("label").css("color", "black");
+		
 		// get inputs
 		var fname = $("input[name=fname]").val();
 		var lname = $("input[name=lname]").val();
@@ -132,152 +135,90 @@ function buttonClicked()
 		var courseType = $("input[name=studentCourseType]:checked").val();
 		var language = $("select").val();
 		
-	var studentInfo = {
-			operation : "",
-			firstName : fname,
-			lastName : lname,
-			phoneNumber : phone,
-			emergencyPhoneNumber : emergencyPhone,
-			email : email,
-			address : address,
-			birthdate : bday,
-			balance : balance,
-			balanceDueDate : balanceDueDate,
-			courseID : courseType,
-			language : language
-		
-		};
-		
 		var patterns = [
 		/^[a-zA-Z]{2,15}$/i,			
 		/^[a-zA-Z]{2,15}$/i,	
-		/[0-9]{10}/i,		
-		/[0-9]{10}/i,
+		/[(]?[0-9]{3}[)]?[-]?[0-9]{3}[-]?[0-9]{4}/i,
+		/[(]?[0-9]{3}[)]?[-]?[0-9]{3}[-]?[0-9]{4}/i,
 		/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/i,	
 	    /^[a-z0-9]+/i,	
 		/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i,
-		/^[0-9]{1,15}$/i,	
-		/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i,	
-		/^[a-z]{1,15}$/i
+		/^[0-9]{1,15}[,.]?[0-9]*$/i,	
+		/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i,
+		/^[English,French,Tamil]/ 
 		];
-			
-	var messages = [
-		"Please enter a valid Firstname",
-		"Please enter a valid Lastname",
-		"Please enter a valid Phone Number",
-		"Please enter a valid Emergency Phone Number",
-		"Please enter a valid Email",
-		"Please enter a valid Address",
-		"Please specify your Date of Birth",
-		"Please enter a valid Balance",
-		"Please enter a valid Due Date",
-		"Please specify your Language",	
+	
+	var errorFields = 
+	[
+		$("#firstNameError"),
+		$("#lastNameError"),
+		$("#phoneError"),
+		$("#emergencyPhoneError"),
+		$("#emailError"),
+		$("#addressError"),
+		$("#bdayError"),
+		$("#balanceError"),
+		$("#balanceDueDateError"),
+		$("#languageError")
+	];
+	
+	var labels = 
+	[
+		$("#firstNameLabel"),
+		$("#lastNameLabel"),
+		$("#phoneLabel"),
+		$("#emergencyPhoneLabel"),
+		$("#emailLabel"),
+		$("#addressLabel"),
+		$("#bdayLabel"),
+		$("#balanceLabel"),
+		$("#balanceDueDateLabel"),
+		$("#languagelabel")
 	];
 			
 
 		
 	var inputs = [fname, lname, phone, emergencyPhone, email, address, bday, balance, balanceDueDate, language];
-	var labels = document.getElementsByClassName("control-label col-sm-2");	
-	var pees = document.getElementsByClassName("notShow");	
 	
 	
 					
-			var errors = new Array();		
+			var errors = false;		
 			
-			for(var i=0; i<inputs.length; i++){
-				
-				var x = patterns[i];
-				var y = inputs[i];					
+			for(var i=0; i<inputs.length; i++)
+			{
+				var pattern = patterns[i];
+				var input = inputs[i];					
 					
-				if( y != "" && x.test(y)){			
+				if( input != "" && pattern.test(input))
+				{
+				} 
 				
-				} else {   
-					errors.push(messages[i]);	
-					 console.log(messages[i]);					 
-					 
+				else 
+				{   
+					errors = true;
+					errorFields[i].css("opacity", "1");
+					labels[i].css("color", "red");
 				}
 			}
-			if(errors.length>0){
-				// display the toast with all the errors from errors array
-			} else{
-				addOrEdit();
-				console.log("sucess")
-				
-		    
+			
+			if(errors == false)
+			{
+				var studentInfo = {
+					operation : "",
+					firstName : fname,
+					lastName : lname,
+					phoneNumber : phone,
+					emergencyPhoneNumber : emergencyPhone,
+					email : email,
+					address : address,
+					birthdate : bday,
+					balance : balance,
+					balanceDueDate : balanceDueDate,
+					courseID : courseType,
+					language : language
+				};
+				addOrEditDB(studentInfo);	
 			}
-		
-	
-	
-	function showErrors(erArray){
-		try{
-			document.getElementById("validB").style.display = "none";
-			var invalid = document.getElementById("invalidB");
-			invalid.innerHTML = "";
-			invalid.style.display = "block";
-			
-			var string = "Error! Sorry, your form is not valid. <br>" + 
-			erArray.length + " error(s) prevented this registration form from being submitted. Please correct any errors below and try again! <br>";
-			
-			for(var i = 0; i<erArray.length; i++){			
-				string += erArray[i] + "<br>";
-			}			
-			invalid.innerHTML = string;		
-		} catch (err){
-			console.log(err.message);
-			alert(err.message);
-		}
-	}
-	
-	function showSuccess(){
-		try{
-			document.getElementById("invalidB").style.display = "none";
-			document.getElementById("validB").style.display = "block";
-			document.getElementById("validB").innerHTML = "Success! Your form is valid!";
-			addOrEdit();
-		} catch (err){
-			console.log(err.message);
-			alert(err.message);
-		}
-	} 
-	function addOrEdit(){
-		
-		if(ACTION == "add")
-		{
-			studentInfo.operation = "insert";
-			
-			$.post("pages/home/studentInfo.php", studentInfo, function(data)
-			{
-				if(data == "success")
-				{
-					showNoticeBox("The selected record was successfully added to the database!");
-				}
-				
-				else
-				{
-					showNoticeBox("Something went wrong... Please try again later.");
-				}
-			});
-		}
-		
-		else if(ACTION == "edit")
-		{
-			studentInfo.operation = "update";
-			studentInfo.studentID = STUDENT_ID;
-			
-			$.post("pages/home/studentInfo.php", studentInfo, function(data)
-			{
-				if(data == "success")
-				{
-					showNoticeBox("The selected record was successfully edited!");
-				}
-				
-				else
-				{
-					showNoticeBox("Something went wrong... Please try again later.");
-				}
-			});
-		}
-	}
 	}
 	
 	else if(id == "deleteButton")
@@ -357,4 +298,44 @@ function hideNoticeBox()
 		"-ms-filter" : "none",
 		"filter" : "none"
 	});
+}
+
+function addOrEditDB(studentInfo)
+{		
+		if(ACTION == "add")
+		{
+			studentInfo.operation = "insert";
+			
+			$.post("pages/home/studentInfo.php", studentInfo, function(data)
+			{
+				if(data == "success")
+				{
+					showNoticeBox("The selected record was successfully added to the database!");
+				}
+				
+				else
+				{
+					Toast("Something went wrong... Please try again later.");
+				}
+			});
+		}
+		
+		else if(ACTION == "edit")
+		{
+			studentInfo.operation = "update";
+			studentInfo.studentID = STUDENT_ID;
+			
+			$.post("pages/home/studentInfo.php", studentInfo, function(data)
+			{
+				if(data == "success")
+				{
+					showNoticeBox("The selected record was successfully edited!");
+				}
+				
+				else
+				{
+					Toast("Something went wrong... Please try again later.");
+				}
+			});
+		}
 }
