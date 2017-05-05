@@ -132,7 +132,7 @@ function buttonClicked()
 		var courseType = $("input[name=studentCourseType]:checked").val();
 		var language = $("select").val();
 		
-		var studentInfo = {
+	var studentInfo = {
 			operation : "",
 			firstName : fname,
 			lastName : lname,
@@ -145,13 +145,101 @@ function buttonClicked()
 			balanceDueDate : balanceDueDate,
 			courseID : courseType,
 			language : language
+		
 		};
 		
-		if ( studentInfo.language.length < 2 || studentInfo.firstName.length < 2 || studentInfo.lastName.length < 2 || studentInfo.email.length < 4 || studentInfo.address.length < 4 || studentInfo.birthdate.length < 4 || studentInfo.balance.length < 1 || studentInfo.balanceDueDate.length < 4) {
-			window.alert("Please fill in all the information.");
-		}else if (studentInfo.emergencyPhoneNumber.length != 10 || studentInfo.phoneNumber.length != 10){
-		window.alert("Phone numbers need to be 10 digits long.");
-		} else {
+		var patterns = [
+		/^[a-zA-Z]{2,15}$/i,			
+		/^[a-zA-Z]{2,15}$/i,	
+		/[0-9]{10}/i,		
+		/[0-9]{10}/i,
+		/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/i,	
+	    /^[a-z0-9]+/i,	
+		/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i,
+		/^[0-9]{1,15}$/i,	
+		/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i,	
+		/^[a-z]{1,15}$/i
+		];
+			
+	var messages = [
+		"Please enter a valid Firstname",
+		"Please enter a valid Lastname",
+		"Please enter a valid Phone Number",
+		"Please enter a valid Emergency Phone Number",
+		"Please enter a valid Email",
+		"Please enter a valid Address",
+		"Please specify your Date of Birth",
+		"Please enter a valid Balance",
+		"Please enter a valid Due Date",
+		"Please specify your Language",	
+	];
+			
+
+		
+	var inputs = [fname, lname, phone, emergencyPhone, email, address, bday, balance, balanceDueDate, language];
+	var labels = document.getElementsByClassName("control-label col-sm-2");	
+	var pees = document.getElementsByClassName("notShow");	
+	
+	
+					
+			var errors = new Array();		
+			
+			for(var i=0; i<inputs.length; i++){
+				
+				var x = patterns[i];
+				var y = inputs[i];					
+					
+				if( y != "" && x.test(y)){			
+				
+				} else {   
+					errors.push(messages[i]);	
+					 console.log(messages[i]);					 
+					 
+				}
+			}
+			if(errors.length>0){
+				// display the toast with all the errors from errors array
+			} else{
+				addOrEdit();
+				console.log("sucess")
+				
+		    
+			}
+		
+	
+	
+	function showErrors(erArray){
+		try{
+			document.getElementById("validB").style.display = "none";
+			var invalid = document.getElementById("invalidB");
+			invalid.innerHTML = "";
+			invalid.style.display = "block";
+			
+			var string = "Error! Sorry, your form is not valid. <br>" + 
+			erArray.length + " error(s) prevented this registration form from being submitted. Please correct any errors below and try again! <br>";
+			
+			for(var i = 0; i<erArray.length; i++){			
+				string += erArray[i] + "<br>";
+			}			
+			invalid.innerHTML = string;		
+		} catch (err){
+			console.log(err.message);
+			alert(err.message);
+		}
+	}
+	
+	function showSuccess(){
+		try{
+			document.getElementById("invalidB").style.display = "none";
+			document.getElementById("validB").style.display = "block";
+			document.getElementById("validB").innerHTML = "Success! Your form is valid!";
+			addOrEdit();
+		} catch (err){
+			console.log(err.message);
+			alert(err.message);
+		}
+	} 
+	function addOrEdit(){
 		
 		if(ACTION == "add")
 		{

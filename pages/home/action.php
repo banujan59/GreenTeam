@@ -352,6 +352,7 @@
 									{
 										?>
 											<script>
+											
 												$("#firstNameContainer").html('<input type="text" name="fname" placeholder="Enter student\'s first name"/>');
 												$("#lastNameContainer").html('<input type="text" name="lname" placeholder="Enter student\'s last name"/>');
 												$("#phoneContainer").html('<input type="number" name="studentPhone" placeholder="5141234567"/>');
