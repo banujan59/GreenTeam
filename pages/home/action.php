@@ -1,167 +1,25 @@
 		<?php
 		session_start();
-		if( isset($_GET["page"]) )
-		{
-		if($_GET["page"] == "addStudent")
+		if( isset($_GET["page"]) && isset($_GET["action"]))
 		{
 			?>
-			<div class="col-md-12">
-						<section> 
-							<div class="sectionHeader">
-								<h2>Add student to database</h2>
-							</div>
-							
-							<!-- The form -->
-							
-							<br/>
-							
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>First Name:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="text" name="fname" placeholder="Banujan"/>
-										</div>
-								</div><!-- End row -->		
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Last Name:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="text" name="lname" placeholder="Atputhawhatever"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Phone Number:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="tel" name="studentPhone" placeholder="514-123-4567"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Emergency Contact:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="tel" name="studentEC" placeholder="450-987-6543"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Email Address:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="email" name="studentEmail" placeholder="banuthegreat@gmail.com"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Home Address:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Date of Birth:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="date" name="studentBD"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Course Time:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="time" name="studentCourseTime"/>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Course Type:</label>
-										</div>
-										<div class="col-md-3">
-											<input type="radio" name="studentCourseType" value="trucks"/> Class 3 - Trucks </br>
-											<input type="radio" name="studentCourseType" value="regularVehicles" checked/> Class 5 - Regular Vehicles
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div class="row" style="height:37.37166324435318%;">
-									<div class="col-md-4"></div>
-									
-										<div class="col-md-2">
-											<label>Language of Preference:</label>
-										</div>
-										<div class="col-md-3">
-											<select>
-											  <option value="eng">English</option>
-											  <option value="fre">French</option>
-											  <option value="tam">Tamil</option>
-											</select>
-										</div>
-								</div><!-- End row -->
-								
-								<br/>
-								
-								<div id="confirmButton" class="button" style="margin: 15px 395px">CONFIRM</div>
-								<div id="cancelButton" class="button" style="margin: 15px 595px">CANCEL</div>
-								
-								</form>
-							</div>
-						</section>
+			<script>
+				// initialize variables
+				var PAGE = "<?php echo $_GET["page"];?>";
+				var ACTION = "<?php echo $_GET["action"];?>";
+				var STUDENT_ID = "";
+				
+				<?php
+				if(isset($_GET["studentID"]))
+				{
+					?>
+					STUDENT_ID = "<?php echo $_GET["studentID"];?>";
+					<?php
+				}
+				?>
+			</script>
 			<?php
-
-		}
-
-		
-		else if($_GET["page"] == "searchStudent")
+		if($_GET["page"] == "searchStudent")
 		{
 			?>
 				<style>
@@ -202,21 +60,12 @@
 						background-color: rgba(239, 48, 56, 0.5) !important;
 					}
 					
-				</style>
-				
-				<script>
-					$(function()
+					#printAllStudentButton
 					{
-						// object of type student
-						var student;
-						
-						// event handler for search box
-						$("input[name=searchField]").keyup(function(e)
-						{
-							
-						});
-					});
-				</script>
+						height: 40px;
+					}
+				</style>
+				<script src="js/searchStudent.js"></script>
 				
 				<div class="row">
 					<div class="col-md-12">
@@ -264,21 +113,16 @@
 										<div class="col-md-2">
 											<label>Search by:</label>
 										</div> <!-- End col -->
-										<div class="col-md-7">
-											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="lname" checked>Last Name
-											</label>
+										<div class="col-md-5">
+									
 											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="fname">First Name
 											</label>
 											<label class="radio-inline">
+												<input type="radio" name="searchCriteria" value="lname" checked>Last Name
+											</label>
+											<label class="radio-inline">
 												<input type="radio" name="searchCriteria" value="birthdate">Date of birth
-											</label>
-											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="language">Language
-											</label>
-											<label class="radio-inline">
-												<input type="radio" name="searchCriteria" value="all">All
 											</label>
 										</div> <!-- End col -->
 									</div> <!-- End row -->
@@ -300,7 +144,6 @@
 											<table class="table table-striped">
 												<thead>
 													<tr>
-														<th>Student ID</th>
 														<th>First name</th>
 														<th>Last name</th>
 														<th>Phone number</th>
@@ -309,49 +152,10 @@
 														<th>Balance</th>
 														<th>Balance due date</th>
 														<th>Course ID</th>
+														<th>Language</th>
 													</tr>
 												</thead>
 												<tbody>
-													<?php
-														$servername = "localhost";
-														$dbusername = "root";
-														$dbpassword = "";
-														$dbname = "universaldb";
-													
-														// Create connection
-														$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-														// Check connection
-														if ($conn->connect_error) {
-															die("Connection failed: " . $conn->connect_error);
-														} 
-	
-														$sql = "SELECT studentId, firstName, lastName, phoneNumber, emergencyPhoneNumber, birthdate, balance, balanceDueDate, courseID  FROM STUDENTS";
-														$result = $conn->query($sql);
-	
-														if ($result->num_rows > 0) {
-														// output data of each row
-															while($row = $result->fetch_assoc())
-															{
-																?>
-																	<tr id="<?php echo $row["studentId"];?>">
-																		<td><?php echo $row["studentId"]; ?></td>
-																		<td><?php echo $row["firstName"]; ?></td>
-																		<td><?php echo $row["lastName"]; ?></td>
-																		<td><?php echo $row["phoneNumber"]; ?></td>
-																		<td><?php echo $row["emergencyPhoneNumber"]; ?></td>
-																		<td><?php echo $row["birthdate"]; ?></td>
-																		<td><?php echo $row["balance"]; ?></td>
-																		<td><?php echo $row["balanceDueDate"]; ?></td>
-																		<td><?php echo $row["courseID"]; ?></td>
-																	</tr>
-																<?php
-															}
-	
-														} else {
-															echo "wrong user password combo";
-														}
-														$conn->close();
-													?>
 												</tbody>
 											</table>
 										</div> <!-- End col -->
@@ -364,6 +168,343 @@
 					</div> <!-- End col -->
 				</div> <!-- End row -->
 			<?php
+		}
+		
+		//if($_GET["page"] == "addStudent")
+		else if($_GET["page"] == "studentInfoForm")
+		{
+			?>
+			<style>
+				.button
+				{
+					position: relative;
+					margin-right: 15px;
+				}
+				
+				.errorMessages
+				{
+					color: red;
+					opacity: 0;
+					transition: .5s;
+				}
+				
+				label
+				{
+					transition: .5s;
+				}
+			</style>
+		
+			<div class="col-md-12">
+						<section> 
+							<div class="sectionHeader">
+								<?php
+									if($_GET["action"] == "add")
+									{
+										?>
+											<h2>Add student to database</h2>
+										<?php
+									}
+									
+									else if($_GET["action"] == "edit")
+									{
+										?>
+											<h2>Edit student</h2>
+										<?php
+									}
+									
+									else if($_GET["action"] == "delete")
+									{
+										?>
+											<h2>Delete student</h2>
+										<?php
+									}
+									
+									else if($_GET["action"] == "display")
+									{
+										?>
+											<h2>Display student</h2>
+										<?php
+									}
+								?>
+							</div>
+							
+							<!-- The form -->
+							
+							<br/>
+							
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="firstNameLabel">First Name:</label>
+										</div>
+										<div id="firstNameContainer" class="col-md-3"></div>
+										<div id="firstNameError" class="col-md-3 errorMessages">Please enter a valid first name</div>
+								</div><!-- End row -->		
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="lastNameLabel">Last Name:</label>
+										</div>
+										<div id="lastNameContainer" class="col-md-3"></div>
+										<div id="lastNameError" class="col-md-3 errorMessages">Please enter a valid last name</div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="phoneLabel">Phone Number:</label>
+										</div>
+										<div id="phoneContainer" class="col-md-3"></div>
+										<div id="phoneError" class="col-md-3 errorMessages">Please enter a valid phone number</div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="emergencyPhoneLabel">Emergency Contact:</label>
+										</div>
+										<div id="emerPhoneContainer" class="col-md-3"></div>
+										<div id="emergencyPhoneError" class="col-md-3 errorMessages">Please enter a valid emergency phone number</div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="emailLabel">Email Address:</label>
+										</div>
+										<div id="emailContainer" class="col-md-3"></div>
+										<div id="emailError" class="col-md-3 errorMessages">Please enter a valid email</div>
+
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="addressLabel">Home Address:</label>
+										</div>
+										<div id="addressContainer" class="col-md-3"></div>
+										<div id="addressError" class="col-md-3 errorMessages">Please enter a valid address</div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="bdayLabel">Date of Birth:</label>
+										</div>
+										<div id="bdayContainer" class="col-md-3"></div>
+										<div id="bdayError" class="col-md-3 errorMessages">Please enter a valid birth date</div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="balanceLabel">Balance:</label>
+										</div>
+										<div id="balanceContainer" class="col-md-3"></div>
+										<div id="balanceError" class="col-md-3 errorMessages">Please enter a valid balance</div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="balanceDueDateLabel">Balance due date:</label>
+										</div>
+										<div id="balanceDueDateContainer" class="col-md-3"></div>
+										<div id="balanceDueDateError" class="col-md-3 errorMessages">Please enter a due date</div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label>Course Type:</label>
+										</div>
+										<div id="courseTypeContainer" class="col-md-3"></div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="row" style="height:37.37166324435318%;">
+									<div class="col-md-4"></div>
+									
+										<div class="col-md-2">
+											<label id="languagelabel">Language of Preference:</label>
+										</div>
+										<div id="languageContainer" class="col-md-3"></div>
+										<div id="languageError" class="col-md-3 errorMessages">Please select a valid language</div>
+								</div><!-- End row -->
+								
+								<br/>
+								
+								<div class="btn-group" style="margin: 12px 385px">
+								  <button id="saveButton" class="button">Save</button>
+								  <button id="cancelButton" class="button" link="home.php">Cancel</button>
+								</div>
+								
+								
+								<?php
+									if($_GET["action"] == "add" || $_GET["action"] == "edit")
+									{
+										?>
+											<script>
+											
+												$("#firstNameContainer").html('<input type="text" name="fname" placeholder="Enter student\'s first name"/>');
+												$("#lastNameContainer").html('<input type="text" name="lname" placeholder="Enter student\'s last name"/>');
+												$("#phoneContainer").html('<input type="tel" name="studentPhone" placeholder="5141234567"/>');
+												$("#emerPhoneContainer").html('<input type="tel" name="studentEC" placeholder="5141234567"/>');
+												$("#emailContainer").html('<input type="email" name="studentEmail" placeholder="example@example.com"/>');
+												$("#addressContainer").html('<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>');
+												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
+												$("#balanceContainer").html('$ <input type="number" name="balance"/>');
+												$("#balanceDueDateContainer").html('<input type="date" name="balanceDueDate"/>');
+			
+												$.post("pages/home/courseDB.php", {operation : "selectALL"}, function(data)
+												{
+													var json = $.parseJSON(data);
+													for(var i = 0 ; i < json.length ; i++)
+													{
+														console.log(json[i].courseId);
+														console.log(json[i].type);
+														console.log(json[i].language);
+														console.log(json[i].scheduleId);
+														console.log(json[i].maxStudents);
+													}
+													
+													$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="2"/> Class 3 - Trucks </br>' +
+
+																				'<input type="radio" name="studentCourseType" value="1" checked/> Class 5 - Regular Vehicles');
+												});
+												
+												$("#languageContainer").html('<select>'+
+																				'<option value="default">Select language</option>' +
+																				'<option value="English">English</option>' +
+																				'<option value="French">French</option>'+
+																				'<option value="Tamil">Tamil</option>'+
+																			'</select>');
+											</script>
+										<?php
+										
+										if($_GET["action"] == "edit")
+										{
+											?>
+											<script>
+												$.post("pages/home/studentInfo.php", {operation : "select", studentID : STUDENT_ID}, function(data)
+												{
+													var json = $.parseJSON(data);
+													
+													$("input[name=fname]").val(json[0].firstName);
+													$("input[name=lname]").val(json[0].lastName);
+													$("input[name=studentPhone]").val(json[0].phoneNumber);
+													$("input[name=studentEC]").val(json[0].emergencyPhoneNumber);
+													$("input[name=studentEmail]").val(json[0].email);
+													$("input[name=studentAddress]").val(json[0].address);
+													$("input[name=studentBD]").val(json[0].birthdate);
+													$("input[name=balance]").val(json[0].balance);
+													$("input[name=balanceDueDate]").val(json[0].balanceDueDate);
+													$("input[name=studentCourseType]:checked").val(json[0].courseID);
+													$("select").val(json[0].language);
+												});
+												
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=edit");
+											</script>
+											<?php
+										}
+									}
+									
+									else if($_GET["action"] == "delete" || $_GET["action"] == "display")
+									{
+										?>
+											<script>
+												$.post("pages/home/studentInfo.php", {operation : "select", studentID : STUDENT_ID}, function(data)
+												{
+													var json = $.parseJSON(data);
+													$("#firstNameContainer").html('<span>' + json[0].firstName + '</span>');
+													$("#lastNameContainer").html('<span>' + json[0].lastName + '</span>');
+													$("#phoneContainer").html('<span>' + json[0].phoneNumber + '</span>');
+													$("#emerPhoneContainer").html('<span>' + json[0].emergencyPhoneNumber + '</span>');
+													$("#emailContainer").html('<span>' + json[0].email + '</span>');
+													$("#addressContainer").html('<span>' + json[0].address + '</span>');
+													$("#bdayContainer").html('<span>' + json[0].birthdate + '</span>');
+													$("#balanceContainer").html('<span>$ ' + json[0].balance + '</span>');
+													$("#balanceDueDateContainer").html('<span>' + json[0].balanceDueDate + '</span>');
+													
+													
+													if(parseInt(json[0].courseID) == 1 )
+														$("#courseTypeContainer").html('<span>Class 3 - Trucks</span>');
+													
+													else if(parseInt(json[0].courseID) == 2 )
+														$("#courseTypeContainer").html('<span>Class 5 - Regular Vehicles</span>');
+													
+													
+													$("#languageContainer").html('<span>' + json[0].language + '</span>');
+												});
+											</script>
+										<?php
+										
+										if($_GET["action"] == "delete")
+										{
+											?>
+											<script>
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=delete");
+												$("#saveButton").attr("id", "deleteButton");
+												$("#deleteButton").text("Delete");
+												$("#deleteButton").addClass("criticalButton");
+											</script>
+											<?php
+										}
+										
+										else
+										{
+											?>
+											<script>
+												$("#cancelButton").attr("link", "home.php?page=searchStudent&action=display");
+												$("#cancelButton").text("Back");
+												$("#saveButton").attr("id", "printStudentButton");
+												$("#printStudentButton").text("Print");
+											</script>
+											<?php
+										}
+									}
+								?>
+								
+								
+								<script>
+									$(".button").click(buttonClicked);
+								</script>
+								
+								</form>
+							</div>
+						</section>
+			<?php
+
 		}
 	}
 ?>

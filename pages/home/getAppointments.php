@@ -3,8 +3,6 @@ session_start();
 	
 	if(!isset($_GET["page"]))
 	{
-		if( $_SESSION["user_type"] == "student")
-		{
 			?>
             <style>
 				.block
@@ -95,7 +93,6 @@ session_start();
         	    <div id="makeAppoint" class="circleButton">Make Appointment</div>
 	            <div id="removeAppoint" class="circleButton">Remove Appointment</div>
     	    <?php
-		}
 	}
 	
 	else

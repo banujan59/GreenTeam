@@ -30,7 +30,14 @@
 	    <nav>
     	    <ul>
 				<li><a href="home.php">Home</a></li>
-				<li><a href="home.php?page=personal_file">Personal File</a></li>
+				<?php
+					if( $_SESSION["user_type"] == "student")
+					{
+						?>
+							<li><a href="home.php?page=personal_file">Personal File</a></li>
+						<?php
+					}
+				?>
 			    <li><a href="home.php?page=schedule">Schedule</a></li>
 			    <li><a href="home.php?page=appointments">Appointments</a></li>
 			    <?php
@@ -60,15 +67,32 @@
 				
 				else if($_GET["page"] == "personal_file")
 				{
-					
+					?>
+                    	<script>
+							$(".container").load("pages/home/PersonalFile.html");
+						</script>
+                    <?php
 				}
 				
 				else if($_GET["page"] == "schedule")
 				{
 					?>
-                    	<p>
-                        	You loaded the schedule.
-                        </p>
+                    	<?php
+					if( $_SESSION["user_type"] == "student")
+					{
+						?>
+							<img src="images/Schedule.png" alt="StudentSchedule">
+						<?php
+					}
+				?>
+				<?php
+					if( $_SESSION["user_type"] == "admin")
+					{
+						?>
+							<img src="images/Schedule - Admin.png" alt="AdminSchedule">
+						<?php
+					}
+				?>
                     <?php
 				}
 				
@@ -83,17 +107,40 @@
 				
 				else if($_GET["page"] == "progression")
 				{
-					
+					?>
+					<div id="wrapper" style="width:100%; text-align:center">
+					<img src="images/ProgressionChart.png" alt="Progression Chart" align="center">
+					</div>
+					<?php
 				}
 				
-				else if($_GET["page"] == "addStudent")
+				else if($_GET["page"] == "studentInfoForm")
 				{
 					?>
 						<script>
 							var page = "<?php echo $_GET["page"] ?>";
-							$(".container").load("pages/home/action.php?page=" + page);
+							var action = "<?php echo $_GET["action"] ?>";
 						</script>
 					<?php
+					
+					if(!isset($_GET["studentID"]))
+					{
+						?>
+						<script>
+							$(".container").load("pages/home/action.php?page=" + page + "&action=" + action);
+						</script>
+						<?php
+					}
+					
+					else
+					{
+						?>
+						<script>
+							var id = "<?php echo $_GET["studentID"]?>";
+							$(".container").load("pages/home/action.php?page=" + page + "&action=" + action + "&studentID=" + id);
+						</script>
+						<?php
+					}
 				}
 				
 				else if($_GET["page"] == "searchStudent")
