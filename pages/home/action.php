@@ -382,7 +382,7 @@
 												$("#emerPhoneContainer").html('<input type="tel" name="studentEC" placeholder="5141234567"/>');
 												$("#emailContainer").html('<input type="email" name="studentEmail" placeholder="example@example.com"/>');
 												$("#addressContainer").html('<input type="text" name="studentAddress" placeholder="123 Rue MacDonald"/>');
-												$("#bdayContainer").html('<input type="date" name="studentBD"/>');
+												$("#bdayContainer").html('<input type="date" name="studentBD" placeholder="MM-DD-YYYY"/>');
 												$("#balanceContainer").html('$ <input type="number" name="balance"/>');
 												$("#balanceDueDateContainer").html('<input type="date" name="balanceDueDate"/>');
 			

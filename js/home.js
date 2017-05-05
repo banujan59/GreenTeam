@@ -180,9 +180,7 @@ function buttonClicked()
 		$("#balanceDueDateLabel"),
 		$("#languagelabel")
 	];
-	
-	
-					
+		
 			var errors = false;		
 			
 			for(var i=0; i<inputs.length; i++)
@@ -244,13 +242,77 @@ function buttonClicked()
 							}	
 						}
 					}
+					
+					// check if student is at least 16 years old
+					else if(i == 6)
+					{
+						// get current date
+						var d = new Date();
+						var currentYear = d.getFullYear();
+						var currentMonth = d.getMonth() + 1;
+						var currentDay = d.getDate();
+						
+						var bdayValues = inputs[i].split("-");
+						var inputYear, inputMonth, inputDay;
+						
+						if(bdayValues[0] > 31)
+							inputYear = bdayValues[0];
+						
+						else
+							inputMonth = bdayValues[0];
+						
+						if(inputMonth == undefined)
+						{
+							inputMonth = bdayValues[1];
+							inputDay = bdayValues[2];
+						}
+						
+						else
+						{
+							inputDay = bdayValues[1];
+							inputYear = bdayValues[2];
+						}
+						
+						
+						// calculate input age
+						var differenceYear = currentYear - inputYear;
+						if( differenceYear >= 16)
+						{
+							if(differenceYear == 16)
+							{
+								// if difference is 16 exactly, check if birthday has passed already
+								var differenceMonth = currentMonth - inputMonth;
+								if( differenceMonth < 0)
+								{
+									showErrorInput(labels[i], errorFields[i]);
+									errors = true;
+								}
+							
+								else if( differenceMonth == 0 )
+								{
+									// if same month, check date
+									if( (currentDay - inputDay) < 0)
+									{
+										showErrorInput(labels[i], errorFields[i]);
+										errors = true;
+									}
+								}
+							}
+						}
+						
+						// if student is less than 16 years old
+						else
+						{
+							showErrorInput(labels[i], errorFields[i]);
+							errors = true;
+						}
+					}
 				} 
 				
 				else 
 				{   
 					errors = true;
-					errorFields[i].css("opacity", "1");
-					labels[i].css("color", "red");
+					showErrorInput(labels[i], errorFields[i]);
 				}
 			}
 			
@@ -391,4 +453,10 @@ function addOrEditDB(studentInfo)
 				}
 			});
 		}
+}
+
+function showErrorInput(label, errorDiv)
+{
+	label.css("color", "red");
+	errorDiv.css("opacity", "1");
 }
