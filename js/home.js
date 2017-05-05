@@ -135,13 +135,16 @@ function buttonClicked()
 		var courseType = $("input[name=studentCourseType]:checked").val();
 		var language = $("select").val();
 		
-		var inputs = [fname, lname, phone, emergencyPhone, email, address, bday, balance, balanceDueDate, language];
+		var inputs = 
+		[
+			fname, lname, phone, emergencyPhone, email, address, bday, balance, balanceDueDate, language
+		];
 		
 		var patterns = [
 		/^[a-zA-Z]{2,15}$/i,			
 		/^[a-zA-Z]{2,15}$/i,	
-		/[(]?[0-9]{3}[)]?[-]?[0-9]{3}[-]?[0-9]{4}/i,
-		/[(]?[0-9]{3}[)]?[-]?[0-9]{3}[-]?[0-9]{4}/i,
+		/[(]?[0-9]{3}[)]?[\s-]?[0-9]{3}[-]?[0-9]{4}/i,
+		/[(]?[0-9]{3}[)]?[\s-]?[0-9]{3}[-]?[0-9]{4}/i,
 		/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/i,	
 	    /^[a-z0-9]+/i,	
 		/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i,
@@ -189,6 +192,58 @@ function buttonClicked()
 					
 				if( input != "" && pattern.test(input))
 				{
+					// add () and - to phone numbr and emergency phone number if needed
+					if(i == 2 || i == 3)
+					{
+						if(/[0-9]{10}/g.test(input))
+						{
+							input = "(" + input.charAt(0) + input.charAt(1) + input.charAt(2) +
+							") " + input.charAt(3) + input.charAt(4) + input.charAt(5) + "-" +
+							input.charAt(6) + input.charAt(7) + input.charAt(8) + input.charAt(9);
+							
+							switch(i)
+							{
+								case 2:
+									phone = input;
+								break;
+								
+								case 3:
+									emergencyPhone = input;
+								break;
+							}	
+						}
+						
+						// add () if needed
+						else if(!/\(([^)]+)\)/.test(input))
+						{
+							var temp = input;
+							input = "(";
+							
+							for(var j = 0 ; j < temp.length ; j++)
+							{
+								if(j == 3 && temp.charAt(j) == "-")
+									input += " ";
+								
+								else
+									input += temp.charAt(j);
+								
+								if(j == 2)
+									input += ") ";
+									
+							}
+							
+							switch(i)
+							{
+								case 2:
+									phone = input;
+								break;
+								
+								case 3:
+									emergencyPhone = input;
+								break;
+							}	
+						}
+					}
 				} 
 				
 				else 

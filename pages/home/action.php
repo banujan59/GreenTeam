@@ -391,11 +391,6 @@
 													var json = $.parseJSON(data);
 													for(var i = 0 ; i < json.length ; i++)
 													{
-														console.log(json[i].courseId);
-														console.log(json[i].type);
-														console.log(json[i].language);
-														console.log(json[i].scheduleId);
-														console.log(json[i].maxStudents);
 													}
 													
 													$("#courseTypeContainer").html('<input type="radio" name="studentCourseType" value="2"/> Class 3 - Trucks </br>' +
