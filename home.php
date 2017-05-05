@@ -107,7 +107,11 @@
 				
 				else if($_GET["page"] == "progression")
 				{
-					
+					?>
+					<div id="wrapper" style="width:100%; text-align:center">
+					<img src="images/ProgressionChart.png" alt="Progression Chart" align="center">
+					</div>
+					<?php
 				}
 				
 				else if($_GET["page"] == "studentInfoForm")
