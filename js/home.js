@@ -135,6 +135,8 @@ function buttonClicked()
 		var courseType = $("input[name=studentCourseType]:checked").val();
 		var language = $("select").val();
 		
+		var inputs = [fname, lname, phone, emergencyPhone, email, address, bday, balance, balanceDueDate, language];
+		
 		var patterns = [
 		/^[a-zA-Z]{2,15}$/i,			
 		/^[a-zA-Z]{2,15}$/i,	
@@ -175,10 +177,6 @@ function buttonClicked()
 		$("#balanceDueDateLabel"),
 		$("#languagelabel")
 	];
-			
-
-		
-	var inputs = [fname, lname, phone, emergencyPhone, email, address, bday, balance, balanceDueDate, language];
 	
 	
 					
